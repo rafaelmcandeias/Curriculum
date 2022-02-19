@@ -13,28 +13,24 @@
 ### 2nd Year
 | Subject                                        | Language(s)                  |  Name                                                 |
 | ---------------------------------------------- | ---------------------------- | ----------------------------------------------------- |
-| Object-Oriented Programming                    | Java                         | [Library Manager](/library-manager)                   |
-| Operating Systems                              | C                            | [Técnico File System](/tecnico-file-system)           |
-| Theory of Computation                          | Turing Machine               | [Universal Turing Machine](/universal-turing-machine) |
-| Analysis and Synthesis of Algorithms           | C                            | [Grades Predictor](/grades-predictor)                 |
-| Analysis and Synthesis of Algorithms           | C++                          | [Citizens Supermarkets](/citizens-supermarkets)       |
-| Human-Computer Interaction                     | Figma                        | [Urban Mobility App](/urban-mobility-app)             |
-| Human-Computer Interaction                     | Processing 3                 | [Target Selection](/target-selection)                 |
-| Human-Computer Interaction                     | Processing 3                 | [Smartwatch Text Entry](/smartwatch-text-entry)       |
+| Object-Oriented Programming                    | Java                         | [Library Manager]                                     |
+| Operating Systems                              | C                            | [Técnico File System]                                 |
+| Theory of Computation                          | Turing Machine               | [Universal Turing Machine]                            |
+| Analysis and Synthesis of Algorithms           | C                            | [Grades Predictor]                                    |
+| Analysis and Synthesis of Algorithms           | C++                          | [Citizens Supermarkets]                               |
+| Human-Computer Interaction                     | Figma                        | [Urban Mobility App]                                  |
+| Human-Computer Interaction                     | Processing 3                 | [Target Selection]                                    |
+| Human-Computer Interaction                     | Processing 3                 | [Smartwatch Text Entry]                               |
 
 <br/>
 
 ### 3rd Year
 | Subject                                        | Language(s)                  |  Name                                                 |
 | ---------------------------------------------- | ---------------------------- | ----------------------------------------------------- |
-| Computer Graphics                              | THREE.js/HTML5               | [Mobile](/mobile)                                     |
-| Computer Graphics                              | THREE.js/HTML5               | [Pool Table](/pool-table)                             |
-| Computer Graphics                              | THREE.js/HTML5               | [Cybertruck](/cybertruck)                             |
-| Computer Graphics                              | THREE.js/HTML5               | [Golf Scene](/golf-scene)                             |
-| Databases                                      | PostgreSQL/Python Flask/HTML | [Odisseia](/odisseia)                                 |
-| Computer Networks                              | C                            | [2FA](/two-factor-authentication)                     |
-| Artificial Intelligence                        | Python                       | [Ricochet Robots](/ricochet-robots)                   |
-| Systems Analysis and Modeling                  | ArchiMate/BPMN/UML/SysML     | [SPX/SATX](/spx-satx)                                 |
-| Compilers                                      | C/C++                        | [FIR](/fir)                                           |
-| Software Engineering                           | PostgreSQL/Spring Boot/Vue   | [Quizzes Tutor](/quizzes-tutor)                       |
-| Distributed Systems                            | Java/gRPC                    | [Bicloin](/bicloin)                                   |
+| Databases                                      | PostgreSQL/Python Flask/HTML | [Odisseia]                                            |
+| Computer Networks                              | C                            | [2FA]                                                 |
+| Artificial Intelligence                        | Python                       | [Ricochet Robots]                                     |
+| Systems Analysis and Modeling                  | ArchiMate/BPMN/UML/SysML     | [SPX/SATX]                                            |
+| Compilers                                      | C/C++                        | [FIR]                                                 |
+| Software Engineering                           | PostgreSQL/Spring Boot/Vue   | [Quizzes Tutor]                                       |
+| Distributed Systems                            | Java/gRPC                    | [Bicloin]                                             |
