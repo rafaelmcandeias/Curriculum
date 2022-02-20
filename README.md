@@ -2,7 +2,7 @@
 ### 1st Year
 | Subject                                        | Language(s)                  |  Name                                                 |
 | ---------------------------------------------- | ---------------------------- | ----------------------------------------------------- |
-| Foundations of Programming                     | Python                       | [Hello Quantum]                                       |
+| Foundations of Programming                     | Python                       | [Hello Quantum](/hello-quantum)                       |
 | Introduction to Computer Architecture          | P3 Assembly                  | [Gorillas]                                            |
 | Logic for Programming                          | Prolog                       | [Binary Puzzle Solver]                                |
 | Introduction to Algorithms and Data Structures | C                            | [Room Booking System]                                 |
