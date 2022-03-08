@@ -3,7 +3,7 @@
 | Subject                                        | Language(s)                  |  Name                                                 |
 | ---------------------------------------------- | ---------------------------- | ----------------------------------------------------- |
 | Foundations of Programming                     | Python                       | [Hello Quantum](/Hello-Quantum)                       |
-| Introduction to Computer Architecture          | P3 Assembly                  | [Space-ship](/Space-ship)                             |
+| Introduction to Computer Architecture          | P3 Assembly                  | [Space-Ship](/Space-Ship)                             |
 | Logic for Programming                          | Prolog                       | [Binary Puzzle Solver]                                |
 | Introduction to Algorithms and Data Structures | C                            | [Room Booking System]                                 |
 | Introduction to Algorithms and Data Structures | C                            | [Contact Manager System]                              |
