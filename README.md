@@ -5,7 +5,7 @@
 | Foundations of Programming                     | Python                       | [Hello Quantum](/Hello-Quantum)                       |
 | Introduction to Computer Architecture          | P3 Assembly                  | [Space Ship](/Space-Ship)                             |
 | Logic for Programming                          | Prolog                       | [Binary Puzzle Solver](/Binary-Puzzle-Solver)         |
-| Introduction to Algorithms and Data Structures | C                            | [Stock Delivery System](/Stock-Delivery-System)       |
+| Introduction to Algorithms and Data Structures | C                            | [Stock Delivery Service](/Stock-Delivery-Service)     |
 | Introduction to Algorithms and Data Structures | C                            | [Contact Manager System]                              |
 
 <br/>
