@@ -14,7 +14,7 @@ CFLAGS = -Wall -Wextra -Werror -ansi -pedantic
 all: main
 
 # Debug rules
-debug: CFLAGS += -g -DDEBUG
+debug: CFLAGS += -g -fsanitize=address -DDEBUG
 debug: all
 
 # Executables

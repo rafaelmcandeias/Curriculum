@@ -24,7 +24,7 @@ int global_ide = 0;
  * @return 1 = True
  */
 int product_exists(int idp) {
-    if (idp >= global_idp || stock[idp]->dead) {
+    if (idp >= global_idp) {
         return 0;
     }
     return 1;
@@ -78,46 +78,28 @@ int weight_limit_broken(int ide, int idp, int quantity) {
 }
 
 
-/**
- * @brief Merges two subarrays of arr[].
- * First subarray is arr[l..m].
- * Second subarray is arr[m+1..r].
- */
-void merge(Product *arr[], int l, int m, int r) {
+void merge(int *arr, int l, int m, int r, char flag) {
     int i, j, k;
     int n1 = m - l + 1;
     int n2 = r - m;
+  
     /* create temp arrays */
-    Product **L = (Product**)malloc(sizeof(Product*) * n1);
-    Product **R = (Product**)malloc(sizeof(Product*) * n2);
-    
-    for (i = 0; i < n1; i++) {
-        L[i] = (Product*)malloc(sizeof(Product));
-    }
-    for (i = 0; i < n2; i++) {
-        R[i] = (Product*)malloc(sizeof(Product));
-    }
-
+    int *L = (int *)malloc(sizeof(int) * n1);
+    int *R = (int *)malloc(sizeof(int) * n2);
+  
     /* Copy data to temp arrays L[] and R[] */
-    for (i = 0; i < n1; i++) {
-        strcpy(L[i]->description, arr[l + i]->description);
-        L[i]->price = arr[l + i]->price;
-        L[i]->weight = arr[l + i]->weight;
-        L[i]->quantity = arr[l + i]->quantity;
-    }
-    for (j = 0; j < n2; j++) {
-        strcpy(R[j]->description, arr[m + 1 + j]->description);
-        R[j]->price = arr[m + 1 + j]->price;
-        R[j]->weight = arr[m + 1 + j]->weight;
-        R[j]->quantity = arr[m + 1 + j]->quantity;
-    }
-
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1 + j];
+  
     /* Merge the temp arrays back into arr[l..r]*/
-    i = 0; /* Initial index of first subarray */
-    j = 0; /* Initial index of second subarray */
-    k = l; /* Initial index of merged subarray */
+    i = 0;
+    j = 0;
+    k = l;
     while (i < n1 && j < n2) {
-        if (L[i]->price <= R [j]->price) {
+        if ((flag == 'l' && stock[L[i]]->price <= stock[R[j]]->price) || 
+            (flag == 'L' && strcmp(stock[L[i]]->description, stock[R[j]]->description) <= 0)) {
             arr[k] = L[i];
             i++;
         }
@@ -127,7 +109,7 @@ void merge(Product *arr[], int l, int m, int r) {
         }
         k++;
     }
-
+  
     /* Copy the remaining elements of L[], if there
     are any */
     while (i < n1) {
@@ -135,7 +117,7 @@ void merge(Product *arr[], int l, int m, int r) {
         i++;
         k++;
     }
-
+  
     /* Copy the remaining elements of R[], if there
     are any */
     while (j < n2) {
@@ -143,39 +125,20 @@ void merge(Product *arr[], int l, int m, int r) {
         j++;
         k++;
     }
-
-    for (i = 0; i < n1; i++) {
-        free(L[i]);
-    }
     free(L);
-    for (i = 0; i < n2; i++) {
-        free(R[i]);
-    }
     free(R);
 }
 
 
-/**
- * @brief applies mergesort
- *
- * @param arr
- * @param l is for left index
- * @param r is right index of the
- * sub-array of arr to be sorted
- */
-void mergeSort(Product *arr[], int l, int r) {
-    int m;
-
+void mergeSort(int *arr, int l, int r, char flag) {
     if (l < r) {
-        /* Same as (l+r)/2, but avoids overflow for
-        large l and h */
-        m = l + (r - l) / 2;
-
+        int m = l + (r - l) / 2;
+  
         /* Sort first and second halves */
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
-
-        merge(arr, l, m, r);
+        mergeSort(arr, l, m, flag);
+        mergeSort(arr, m + 1, r, flag);
+  
+        merge(arr, l, m, r, flag);
     }
 }
 
@@ -196,12 +159,11 @@ void add_to_stock(char *parameters) {
     p->price = price;
     p->weight = weight;
     p->quantity = quantity;
-    p->dead = 0;
     p->id = global_idp++;
 
     stock[p->id] = p;
 
-    printf("Novo produto criado %d.\n", p->id);
+    printf("Novo produto %d.\n", p->id);
 }
 
 
@@ -236,7 +198,7 @@ void new_delivery() {
         for (idp = 0; idp < STOCK_SIZE; idp++) {
             deliveries[global_ide]->product_quantity[idp] = 0;
         }
-        global_ide++;
+        printf("Nova encomenda %d.\n", global_ide++);
     }
 }
 
@@ -292,7 +254,7 @@ void remove_qtd_from_stock(char *parameters) {
         printf("Impossivel remover %d unidades do produto %d do stock. Quantidade insuficiente.\n", qtd, idp);
     }
     else {
-        stock[idp]->quantity -= qtd;
+        stock[idp]->quantity = qtd > stock[idp]->quantity ? 0 : stock[idp]->quantity-qtd;
     }
 }
 
@@ -386,7 +348,7 @@ void print_product_in_delivery(char *parameters) {
         printf("Impossivel listar produto %d. Produto inexistente.\n", idp);
     }
     else {
-        printf("%s %d\n", stock[idp]->description, deliveries[ide]->product_quantity[idp]);
+        printf("%s %d.\n", stock[idp]->description, deliveries[ide]->product_quantity[idp]);
     }
 }
 
@@ -408,35 +370,80 @@ void delivery_with_most_product(char *parameters) {
         for (ide = 1; ide < global_ide; ide++) {
             max_ide = deliveries[ide]->product_quantity[idp] > deliveries[max_ide]->product_quantity[idp] ? ide : max_ide;
         }
-        printf("Maximo produto %d %d %d.\n", idp, max_ide, deliveries[max_ide]->product_quantity[idp]);
+        if (deliveries[max_ide]->product_quantity[idp] > 0) {
+            printf("Maximo produto %d %d %d.\n", idp, max_ide, deliveries[max_ide]->product_quantity[idp]);
+        }
     }
 }
 
 
 /**
  * @brief Prints all products in stock
- * ordered by their description. Uses
+ * ordered by their price. Uses
  * mergesort algorithm
  * @performance: O(NLog(N))
  */
 void print_stock_ordered() {
-    Product *arr[STOCK_SIZE];
-    int i;
+    int *arr = (int*)malloc(sizeof(int) * global_idp);
+    int i, idp;
 
-    memcpy(arr, stock, sizeof(stock));
-    mergeSort(arr, 0, global_idp - 1);
-
+    /* Populate */
     for (i = 0; i < global_idp; i++) {
-        printf("%s %d %d\n", arr[i]->description, arr[i]->price, arr[i]->quantity);
+        arr[i] = i;
+    }
+
+    mergeSort(arr, 0, global_idp-1, 'l');
+
+    /* Print */
+    printf("Produtos\n");
+    for (i = 0; i < global_idp; i++) {
+        idp = arr[i];
+        printf("* %s %d %d\n", stock[idp]->description, stock[idp]->price, stock[idp]->quantity);
+    }
+    /* Free temp space */
+    free(arr);
+}
+
+
+/**
+ * @brief Prints all products in delivery
+ * ordered by their description. Uses
+ * mergesort algorithm.
+ * @performance: O(NLog(N))
+ * @param parameters ide
+ */
+void print_products_in_delivery(char *parameters) {
+    int ide, idp, nP, i;
+    int *arr;
+    sscanf(parameters, "%d", &ide);
+
+    if (!delivery_exists(ide)) {
+        printf("Impossivel listar encomenda %d. Encomenda inexistente.\n", ide);
+    }
+
+    else {
+        arr = (int*)malloc(sizeof(int) * global_idp);
+        /* Populate */
+        nP = 0;
+        for (idp = 0; idp < global_idp; idp++) {
+            if (deliveries[ide]->product_quantity[idp] > 0) {
+                arr[nP++] = idp;
+            }
+        }
+
+        mergeSort(arr, 0, nP-1, 'L');
+
+        /* Print */
+        printf("Encomenda %d\n", ide);
+        for (i = 0; i < nP; i++) {
+            idp = arr[i];
+            printf("* %s %d %d\n", stock[idp]->description, stock[idp]->price, deliveries[ide]->product_quantity[idp]);
+        }
+        /* Free temp space */
+        free(arr);
     }
 }
 
-
-/*
-void print_products(int ide) {
-
-}
-*/
 
 /**
  * @brief Frees allocated mem
@@ -465,8 +472,7 @@ void print_all() {
     int i, j;
     printf("\n-------Print Stock-------\n");
     for (i = 0; i < global_idp; i++) {
-        if (!stock[i]->dead)
-            printf("%d : %s : p = %d : w = %d : qtd = %d\n", stock[i]->id, stock[i]->description, stock[i]->price, stock[i]->weight, stock[i]->quantity);
+        printf("%d : %s : p = %d : w = %d : qtd = %d\n", stock[i]->id, stock[i]->description, stock[i]->price, stock[i]->weight, stock[i]->quantity);
     }
 
     printf("\n-------Print Deliveries-------\n");

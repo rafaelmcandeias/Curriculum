@@ -48,7 +48,6 @@ typedef struct Products {
     int price;
     int weight;
     int quantity;
-    int dead;
 } Product;
 
 typedef struct Deliveries {
