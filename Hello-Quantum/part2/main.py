@@ -70,18 +70,22 @@ def celula_para_str(celule):
     return celule.__str__()
 
 
-c0 = cria_celula(0)
-c1 = cria_celula(1)
-cx = cria_celula(-1)
-print(celula_para_str(c1))
-print(celula_para_str(cx))
-print(celula_para_str(c0))
-print(celulas_iguais(c1,c0))
-c2 = cria_celula(1)
-print(celulas_iguais(c1,c2))
-print(eh_celula(c0))
-print(eh_celula(-2))
-print(eh_celula(2))
-print(celula_para_str(inverte_estado(c0)))
-print(celula_para_str(inverte_estado(c1)))
-print(celula_para_str(inverte_estado(cx)))
+# TESTE
+def teste2_1():
+    c0 = cria_celula(0)
+    c1 = cria_celula(1)
+    cx = cria_celula(-1)
+    print(celula_para_str(c1))
+    print(celula_para_str(cx))
+    print(celula_para_str(c0))
+    print(celulas_iguais(c1,c0))
+    c2 = cria_celula(1)
+    print(celulas_iguais(c1,c2))
+    print(eh_celula(c0))
+    print(eh_celula(-2))
+    print(eh_celula(2))
+    print(celula_para_str(inverte_estado(c0)))
+    print(celula_para_str(inverte_estado(c1)))
+    print(celula_para_str(inverte_estado(cx)))
+
+
