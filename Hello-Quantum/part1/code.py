@@ -1,5 +1,831 @@
+"""
+code for testing
+"""
 
 
+def tests():
+    """ Function used to test code while being developped."""
+    # eh_tabuleiro testing
+    print('----eh_tabuleiro testing----')
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    assert eh_tabuleiro(t) == True
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1, 0))
+    assert eh_tabuleiro(
+        t) == False, "Last line of puzzle with incorrect dimension"
+    t = (3)
+    assert eh_tabuleiro(t) == False, "Not a tuple"
+
+    # tabuleiro_str testing
+    print('----tabuleiro_str testing----')
+    t = ((-1, -1, -1), (1, 1, -1), (0, -1))
+    assert tabuleiro_str(
+        t) == '+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..1.0..|\n+-------+'
+    target = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    print(tabuleiro_str(target))
+    assert tabuleiro_str(
+        target) == '+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..0.0..|\n+-------+'
+    try:
+        print(tabuleiro_str(((-1, -1, -1), (0, 0, -1), (-1, -1, -1))))
+    except ValueError as ve:
+        print(ve)
+
+    # tabuleiros_iguais testing
+    print('----tabuleiros_iguais testing----')
+    p1 = ((-1, -1, -1), (1, 1, -1), (0, -1))
+    print(tabuleiro_str(p1))
+    assert tabuleiros_iguais(p1, p1) == True, "Should be equal"
+    assert tabuleiros_iguais(p1, target) == False, "They are different"
+    p2 = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    assert tabuleiros_iguais(p2, target) == True, "Should be equal"
+    try:
+        tabuleiros_iguais((-1, -1, -1), target)
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiros_iguais([-1, -1, -1], target)
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiros_iguais(tuple(), target)
+    except ValueError as ve:
+        print(ve)
+
+    # Porta_x Testing
+    print("----porta_x testing----")
+    p2 = porta_x(p1, "E")
+    print(tabuleiro_str(p2))
+    p3 = porta_x(p2, "D")
+    print(tabuleiro_str(p3))
+    try:
+        p = porta_x(p2, "X")
+    except ValueError as ve:
+        print(ve)
+
+    # Porta_z Testing
+    print("----porta_z testing----")
+    p7 = ((1, -1, 1), (-1, -1, -1), (-1, 0))
+    print(tabuleiro_str(p7))
+    p8 = porta_z(p7, "E")
+    print(tabuleiro_str(p8))
+    p9 = porta_z(p8, "D")
+    print(tabuleiro_str(p9))
+    try:
+        p = porta_z(p9, "X")
+    except ValueError as ve:
+        print(ve)
+
+    # Porta_h testing
+    print("----porta_h testing----")
+    p4 = ((-1, -1, -1), (0, -1, 0), (-1, 0))
+    print(tabuleiro_str(p4))
+    p5 = porta_h(p4, "E")
+    print(tabuleiro_str(p5))
+    p6 = porta_h(p5, "D")
+    print(tabuleiro_str(p6))
+    try:
+        p = porta_h(p6, "X")
+    except ValueError as ve:
+        print(ve)
+
+
+def final_tests():
+    """ Function to validate the code.
+        Test when code is completed.
+    """
+    test_counter = 0
+    print("----Testing eh_tabuleiro----")
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    assert eh_tabuleiro(t) == True
+    t = (('-1', '-1', '-1'), ('0', '0', '-1'), ('1', '-1'))
+    assert eh_tabuleiro(t) == False
+    t = (('2', '-1', '6'), ('0', '2', '-1'), ('1', '-1'))
+    assert eh_tabuleiro(t) == False
+    t = ((), (), ())
+    assert eh_tabuleiro(t) == False
+    t = ('()', '()', '()')
+    assert eh_tabuleiro(t) == False
+    t = ([], [], [])
+    assert eh_tabuleiro(t) == False
+    t = ((2, -1, 6), (0, 2, -1), (1, -1))
+    assert eh_tabuleiro(t) == False
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1), ())
+    assert eh_tabuleiro(t) == False
+    t = ((-1, -1, -1), (1, -1))
+    assert eh_tabuleiro(t) == False
+    t = ((-1, -1, -1, -1), (0, 0, -1), (1, -1))
+    assert eh_tabuleiro(t) == False
+    t = ((-1, -1, -1), (0, 0, -1, -1), (1, -1))
+    assert eh_tabuleiro(t) == False
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1, -1))
+    assert eh_tabuleiro(t) == False
+    t = [(-1, -1, -1), (0, 0, -1), (1, -1)]
+    assert eh_tabuleiro(t) == False
+    t = ([-1, -1, -1], [0, 0, -1], [1, -1])
+    assert eh_tabuleiro(t) == False
+    t = [[-1, -1, -1], [0, 0, -1], [1, -1]]
+    assert eh_tabuleiro(t) == False
+    t = '((-1,-1,-1),(0,0,-1),(1,-1))'
+    assert eh_tabuleiro(t) == False
+    t = ()
+    assert eh_tabuleiro(t) == False
+    t = []
+    assert eh_tabuleiro(t) == False
+    t = ((1, -1), (0, 0, -1), (-1, -1, -1))
+    assert eh_tabuleiro(t) == False
+    t = [(-1, -1, -1), (0, 0, -1)]
+    assert eh_tabuleiro(t) == False
+
+    print("----Testing tabuleiro_str----")
+    assert tabuleiro_str(((-1, -1, -1), (0, -1, 0), (-1, 0))
+                         ) == '+-------+\n|...x...|\n|..x.0..|\n|.x.x.0.|\n|..0.x..|\n+-------+'
+    assert tabuleiro_str(((-1, -1, -1), (0, -1, 1), (-1, 1))
+                         ) == '+-------+\n|...x...|\n|..x.1..|\n|.x.x.1.|\n|..0.x..|\n+-------+'
+    assert tabuleiro_str(((-1, -1, -1), (0, 0, -1), (0, -1))
+                         ) == '+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..0.0..|\n+-------+'
+    assert tabuleiro_str(((-1, -1, -1), (0, 1, -1), (1, -1))
+                         ) == '+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..0.1..|\n+-------+'
+    assert tabuleiro_str(((-1, -1, -1), (1, -1, 0), (-1, 1))
+                         ) == '+-------+\n|...x...|\n|..x.0..|\n|.x.x.1.|\n|..1.x..|\n+-------+'
+    assert tabuleiro_str(((-1, -1, -1), (1, -1, 1), (-1, 0))
+                         ) == '+-------+\n|...x...|\n|..x.1..|\n|.x.x.0.|\n|..1.x..|\n+-------+'
+    assert tabuleiro_str(((-1, -1, -1), (1, 0, -1), (1, -1))
+                         ) == '+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..1.1..|\n+-------+'
+    assert tabuleiro_str(((-1, -1, -1), (1, 1, -1), (0, -1))
+                         ) == '+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..1.0..|\n+-------+'
+    assert tabuleiro_str(((0, -1, 0), (-1, -1, -1), (-1, 0))
+                         ) == '+-------+\n|...0...|\n|..x.x..|\n|.0.x.0.|\n|..x.x..|\n+-------+'
+    assert tabuleiro_str(((0, -1, 1), (-1, -1, -1), (-1, 1))
+                         ) == '+-------+\n|...1...|\n|..x.x..|\n|.0.x.1.|\n|..x.x..|\n+-------+'
+    assert tabuleiro_str(((0, 0, -1), (-1, -1, -1), (0, -1))
+                         ) == '+-------+\n|...x...|\n|..0.x..|\n|.0.x.x.|\n|..x.0..|\n+-------+'
+    assert tabuleiro_str(((0, 1, -1), (-1, -1, -1), (1, -1))
+                         ) == '+-------+\n|...x...|\n|..1.x..|\n|.0.x.x.|\n|..x.1..|\n+-------+'
+    assert tabuleiro_str(((1, -1, 0), (-1, -1, -1), (-1, 1))
+                         ) == '+-------+\n|...0...|\n|..x.x..|\n|.1.x.1.|\n|..x.x..|\n+-------+'
+    assert tabuleiro_str(((1, -1, 1), (-1, -1, -1), (-1, 0))
+                         ) == '+-------+\n|...1...|\n|..x.x..|\n|.1.x.0.|\n|..x.x..|\n+-------+'
+    assert tabuleiro_str(((1, 0, -1), (-1, -1, -1), (1, -1))
+                         ) == '+-------+\n|...x...|\n|..0.x..|\n|.1.x.x.|\n|..x.1..|\n+-------+'
+    assert tabuleiro_str(((1, 1, -1), (-1, -1, -1), (0, -1))
+                         ) == '+-------+\n|...x...|\n|..1.x..|\n|.1.x.x.|\n|..x.0..|\n+-------+'
+    assert tabuleiro_str(((-1, -1, -1), (0, 0, -1), (0, -1))
+                         ) != '+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..0.0..|\n+-------+\n'
+    assert tabuleiro_str(((-1, -1, -1), (0, 1, -1), (1, -1))
+                         ) != '+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..0.1..|\n+-------+ '
+    assert tabuleiro_str(((-1, -1, -1), (0, 1, -1), (1, -1))
+                         ) != '+_______+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..0.1..|\n+_______+'
+    try:
+        tabuleiro_str(((1, -1, -1, -1), (-1, -1, -1), (1, 0)))
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str(((1, -1, -1), (-1, -1, -1, -1), (1, 0)))
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str(((1, -1, -1), (-1, -1, -1), (1, 0, 1)))
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str((('1', '-1', '-1'), ('-1', '-1', '-1'), ('1', '0', '1')))
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str((((), (), ()), ((), (), ()), ((), ())))
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str(((2, -1, 6), (0, 2, -1), (1, -1)))
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str(([-1, -1, -1], [0, 0, -1], [1, -1]))
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str([[-1, -1, -1], [0, 0, -1], [1, -1]])
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str([(-1, -1, -1), (0, 0, -1), (1, -1)])
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str([(-1, -1, -1), (0, 0, -1), (1, -1)])
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str('((-1,-1,-1),(0,0,-1),(1,-1))')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    try:
+        tabuleiro_str(((1, -1), (0, 0, -1), (-1, -1, -1)))
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+
+    print("----Testing tabuleiros_iguais----")
+    t1 = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    t2 = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    assert tabuleiros_iguais(t1, t2) == True
+    t1 = ((0, -1, -1), (0, 0, -1), (1, -1))
+    t2 = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    assert tabuleiros_iguais(t1, t2) == False
+    t1 = ((-2, -1, -1), (0, 0, -1), (1, -1))
+    t2 = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((-1, -1, -1), (0, 'x', -1), (1, -1))
+    t2 = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    t2 = ((-2, -1, -1), (0, 0, -1), (1, -1))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t2 = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    t1 = ((-2, -1, -1), (0, 0, -1), (1, -1))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    t2 = ((-1, -1, -1), (0, 'x', -1), (1, -1))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = '((-1,-1,-1),(0,0,-1),(1,-1))'
+    t2 = '((-1,-1,-1),(0,0,-1),(1,-1))'
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = [(-1, -1, -1), (0, 0, -1), (1, -1)]
+    t2 = [(-1, -1, -1), (0, 0, -1), (1, -1)]
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ([-1, -1, -1], [0, 0, -1], [1, -1])
+    t2 = ([-1, -1, -1], [0, 0, -1], [1, -1])
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = [[-1, -1, -1], [0, 0, -1], [1, -1]]
+    t2 = [[-1, -1, -1], [0, 0, -1], [1, -1]]
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = [[-1, -1, -1], [0, 0, -1], [1, -1]]
+    t2 = [[-1, -1, -1], [0, 0, -1], [1, -1, 1]]
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = '0'
+    t2 = '0'
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ()
+    t2 = ()
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((1,), (1,), (1,))
+    t2 = ((1,), (1,), (1,))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((2, 3, 4), (4, 5, 6), (7, 8))
+    t2 = ((2, 3, 4), (4, 5, 6), (7, 8))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((-1, -1, -1), (0, 0, -1), (1, 1, -1))
+    t2 = ((-1, -1, -1), (0, 0, -1), (1, 1, -1))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((-1, -1, -1), (0, -1), (1, -1))
+    t2 = ((-1, -1, -1), (0, -1), (1, -1))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((-1, -1, -1), (0, 0, -1), (1,))
+    t2 = ((-1, -1, -1), (0, 0, -1), (1,))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t1 = ((-1, -1), (0, 0, -1), (1, -1))
+    t2 = ((-1, -1), (0, 0, -1), (1, -1))
+    try:
+        tabuleiros_iguais(t1, t2)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+
+    print("----Testing porta_x----")
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    try:
+        porta_x(t, 1)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    try:
+        porta_x(t, 'ES')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    try:
+        porta_x(t, ())
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    try:
+        porta_x(t, [])
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (1, -1))
+    type(porta_x(t, 'D')) == tuple
+    assert porta_x(((-1, -1, -1), (0, -1, 0), (-1, 0)),
+                   "D") == ((-1, -1, -1), (0, -1, 0), (-1, 0))
+    assert porta_x(((-1, -1, -1), (0, -1, 0), (-1, 0)),
+                   "E") == ((-1, -1, -1), (1, -1, 1), (-1, 0))
+    assert porta_x(((-1, -1, -1), (0, 0, -1), (0, -1)),
+                   "D") == ((-1, -1, -1), (0, 1, -1), (1, -1))
+    assert porta_x(((-1, -1, -1), (0, 0, -1), (0, -1)),
+                   "E") == ((-1, -1, -1), (1, 1, -1), (0, -1))
+    assert porta_x(((-1, -1, -1), (0, 1, -1), (1, -1)),
+                   "D") == ((-1, -1, -1), (0, 0, -1), (0, -1))
+    assert porta_x(((-1, -1, -1), (0, 1, -1), (1, -1)),
+                   "E") == ((-1, -1, -1), (1, 0, -1), (1, -1))
+    assert porta_x(((-1, -1, -1), (1, -1, 0), (-1, 1)),
+                   "D") == ((-1, -1, -1), (1, -1, 0), (-1, 1))
+    assert porta_x(((-1, -1, -1), (1, -1, 0), (-1, 1)),
+                   "E") == ((-1, -1, -1), (0, -1, 1), (-1, 1))
+    assert porta_x(((-1, -1, -1), (1, 0, -1), (1, -1)),
+                   "D") == ((-1, -1, -1), (1, 1, -1), (0, -1))
+    assert porta_x(((-1, -1, -1), (1, 0, -1), (1, -1)),
+                   "E") == ((-1, -1, -1), (0, 1, -1), (1, -1))
+    assert porta_x(((-1, -1, -1), (1, 1, -1), (0, -1)),
+                   "D") == ((-1, -1, -1), (1, 0, -1), (1, -1))
+    assert porta_x(((-1, -1, -1), (1, 1, -1), (0, -1)),
+                   "E") == ((-1, -1, -1), (0, 0, -1), (0, -1))
+    assert porta_x(((0, 0, -1), (-1, -1, -1), (0, -1)),
+                   "D") == ((0, 1, -1), (-1, -1, -1), (1, -1))
+    assert porta_x(((0, 0, -1), (-1, -1, -1), (0, -1)),
+                   "E") == ((0, 0, -1), (-1, -1, -1), (0, -1))
+    assert porta_x(((0, 1, -1), (-1, -1, -1), (1, -1)),
+                   "D") == ((0, 0, -1), (-1, -1, -1), (0, -1))
+    assert porta_x(((0, 1, -1), (-1, -1, -1), (1, -1)),
+                   "E") == ((0, 1, -1), (-1, -1, -1), (1, -1))
+    assert porta_x(((1, 1, -1), (-1, -1, -1), (0, -1)),
+                   "D") == ((1, 0, -1), (-1, -1, -1), (1, -1))
+    assert porta_x(((1, 1, -1), (-1, -1, -1), (0, -1)),
+                   "E") == ((1, 1, -1), (-1, -1, -1), (0, -1))
+    t = ((-1, -1, -1), (0, -1), (1, -1))
+    try:
+        porta_x(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, -1, 1), (1, -1, 1))
+    try:
+        porta_x(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = '((-1,-1,-1),(0,0,-1),(1,-1))'
+    try:
+        porta_x(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, -1, -1), (0, 0, -1), (1, -1)]
+    try:
+        porta_x(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [[-1, -1, -1], [0, 0, -1], [1, -1]]
+    try:
+        porta_x(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ([-1, -1, -1], [0, 0, -1], [1, -1])
+    try:
+        porta_x(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, 2, -1), (0, 3, -1), (4, -1)]
+    try:
+        porta_x(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, 2, -1), (0, 3, -1), (1, 3)]
+    try:
+        porta_x(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, 'x', '-1'), ('0', 3, -1), (1, '-1'))
+    try:
+        porta_x(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+
+    print("----Testing porta_z----")
+    t = ((0, -1, 4), (-1, -1, -1), (-1, 0))
+    try:
+        porta_z(t, 1)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    try:
+        porta_z(t, 'A')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    try:
+        porta_z(t, ())
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    try:
+        porta_z(t, [])
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    try:
+        porta_z(t, 'h')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'E')
+    assert t2[0][2] == 1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'E')
+    assert t2[0][1] == -1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'E')
+    assert t2[0][0] == 1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'E')
+    assert t2[0][1] == -1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'E')
+    assert t2[1][2] == -1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'E')
+    assert t2[2][1] == 0
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'D')
+    assert t2[0][2] == 1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'D')
+    assert t2[1][2] == -1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'D')
+    assert t2[2][1] == 1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'D')
+    assert t2[0][1] == -1
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'D')
+    assert t2[0][0] == 0
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'D')
+    assert t2[0][1] != 'x'
+    assert porta_z(((-1, -1, -1), (0, 1, -1), (1, -1)),
+                   "D") == ((-1, -1, -1), (0, 1, -1), (1, -1))
+    assert porta_z(((-1, -1, -1), (0, 1, -1), (1, -1)),
+                   "E") == ((-1, -1, -1), (0, 1, -1), (1, -1))
+    assert porta_z(((-1, -1, -1), (1, -1, 1), (-1, 0)),
+                   "D") == ((-1, -1, -1), (1, -1, 0), (-1, 1))
+    assert porta_z(((-1, -1, -1), (1, -1, 1), (-1, 0)),
+                   "E") == ((-1, -1, -1), (1, -1, 1), (-1, 0))
+    assert porta_z(((-1, -1, -1), (1, 0, -1), (1, -1)),
+                   "D") == ((-1, -1, -1), (1, 0, -1), (1, -1))
+    assert porta_z(((-1, -1, -1), (1, 0, -1), (1, -1)),
+                   "E") == ((-1, -1, -1), (1, 0, -1), (1, -1))
+    assert porta_z(((0, -1, 0), (-1, -1, -1), (-1, 0)),
+                   "D") == ((0, -1, 1), (-1, -1, -1), (-1, 1))
+    assert porta_z(((0, -1, 0), (-1, -1, -1), (-1, 0)),
+                   "E") == ((1, -1, 1), (-1, -1, -1), (-1, 0))
+    assert porta_z(((0, -1, 1), (-1, -1, -1), (-1, 1)),
+                   "D") == ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    assert porta_z(((0, -1, 1), (-1, -1, -1), (-1, 1)),
+                   "E") == ((1, -1, 0), (-1, -1, -1), (-1, 1))
+    assert porta_z(((0, 0, -1), (-1, -1, -1), (0, -1)),
+                   "D") == ((0, 0, -1), (-1, -1, -1), (0, -1))
+    assert porta_z(((0, 0, -1), (-1, -1, -1), (0, -1)),
+                   "E") == ((1, 1, -1), (-1, -1, -1), (0, -1))
+    assert porta_z(((1, -1, 0), (-1, -1, -1), (-1, 1)),
+                   "D") == ((1, -1, 1), (-1, -1, -1), (-1, 0))
+    assert porta_z(((1, -1, 0), (-1, -1, -1), (-1, 1)),
+                   "E") == ((0, -1, 1), (-1, -1, -1), (-1, 1))
+    assert porta_z(((1, -1, 1), (-1, -1, -1), (-1, 0)),
+                   "D") == ((1, -1, 0), (-1, -1, -1), (-1, 1))
+    assert porta_z(((1, 1, -1), (-1, -1, -1), (0, -1)),
+                   "E") == ((0, 0, -1), (-1, -1, -1), (0, -1))
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    assert type(porta_z(t, 'D')) == tuple
+    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    t2 = porta_z(t, 'D')
+    t3 = porta_z(t, 'E')
+    assert t2[0][2] == t3[0][2]
+    t = ((-1, -1, -1), (0, -1), (1, -1))
+    try:
+        porta_z(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, -1, 1), (1, -1, 1))
+    try:
+        porta_z(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1, -1), (0, -1, 1), (1, -1))
+    try:
+        porta_z(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = '((-1,-1,-1),(0,0,-1),(1,-1))'
+    try:
+        t2 = porta_z(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, -1, -1), (0, 0, -1), (1, -1)]
+    try:
+        t2 = porta_z(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [[-1, -1, -1], [0, 0, -1], [1, -1]]
+    try:
+        t2 = porta_z(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ([-1, -1, -1], [0, 0, -1], [1, -1])
+    try:
+        t2 = porta_z(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, 2, -1), (0, 3, -1), (4, -1)]
+    try:
+        t2 = porta_z(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, 2, -1), (0, 3, -1), (1, 3)]
+    try:
+        t2 = porta_z(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, '-1', -1), (0, 2, 'x'), (1, 'a'))
+    try:
+        t2 = porta_z(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+
+    print("----Testing porta_h----")
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    try:
+        porta_h(t, 1)
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    try:
+        porta_h(t, 'A')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    try:
+        porta_h(t, ())
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    try:
+        porta_h(t, [])
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    try:
+        porta_h(t, 'z')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'E')
+    assert t2[1][1] == -1
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'E')
+    assert t2[1][0] == -1
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'E')
+    assert t2[2][0] == 0
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'E')
+    assert t2[0][0] == 0
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'E')
+    assert t2[0][1] == 0
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'E')
+    assert t2[0][2] == -1
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'E')
+    assert t2[0][2] != 'x'
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'E')
+    assert t2[2][1] == -1
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'D')
+    assert t2[1][1] == -1
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'D')
+    assert t2[2][0] == -1
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'D')
+    assert t2[2][1] == 0
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'D')
+    assert t2[1][2] == 0
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'D')
+    assert t2[0][2] == -1
+    assert porta_h(((-1, -1, -1), (0, -1, 1), (-1, 1)),
+                   "D") == ((-1, -1, -1), (0, 1, -1), (1, -1))
+    assert porta_h(((-1, -1, -1), (0, -1, 1), (-1, 1)),
+                   "E") == ((0, -1, 1), (-1, -1, -1), (-1, 1))
+    assert porta_h(((-1, -1, -1), (0, 0, -1), (0, -1)),
+                   "D") == ((-1, -1, -1), (0, -1, 0), (-1, 0))
+    assert porta_h(((-1, -1, -1), (0, 0, -1), (0, -1)),
+                   "E") == ((0, 0, -1), (-1, -1, -1), (0, -1))
+    assert porta_h(((-1, -1, -1), (1, 1, -1), (0, -1)),
+                   "D") == ((-1, -1, -1), (1, -1, 1), (-1, 0))
+    assert porta_h(((-1, -1, -1), (1, 1, -1), (0, -1)),
+                   "E") == ((1, 1, -1), (-1, -1, -1), (0, -1))
+    assert porta_h(((0, -1, 0), (-1, -1, -1), (-1, 0)),
+                   "D") == ((0, 0, -1), (-1, -1, -1), (0, -1))
+    assert porta_h(((0, -1, 0), (-1, -1, -1), (-1, 0)),
+                   "E") == ((-1, -1, -1), (0, -1, 0), (-1, 0))
+    assert porta_h(((0, -1, 1), (-1, -1, -1), (-1, 1)),
+                   "D") == ((0, 1, -1), (-1, -1, -1), (1, -1))
+    assert porta_h(((0, -1, 1), (-1, -1, -1), (-1, 1)),
+                   "E") == ((-1, -1, -1), (0, -1, 1), (-1, 1))
+    assert porta_h(((0, 0, -1), (-1, -1, -1), (0, -1)),
+                   "D") == ((0, -1, 0), (-1, -1, -1), (-1, 0))
+    assert porta_h(((0, 0, -1), (-1, -1, -1), (0, -1)),
+                   "E") == ((-1, -1, -1), (0, 0, -1), (0, -1))
+    assert porta_h(((0, 1, -1), (-1, -1, -1), (1, -1)),
+                   "D") == ((0, -1, 1), (-1, -1, -1), (-1, 1))
+    assert porta_h(((0, 1, -1), (-1, -1, -1), (1, -1)),
+                   "E") == ((-1, -1, -1), (0, 1, -1), (1, -1))
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    assert type(porta_h(t, 'D')) == tuple
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'D')
+    t3 = porta_h(t, 'E')
+    assert t2[1][2] == t3[0][1]
+    t = ((-1, -1, -1), (0, 0, -1), (0, -1))
+    t2 = porta_h(t, 'D')
+    t3 = porta_h(t, 'E')
+    assert t2[1][1] == t3[1][1]
+    t = ((-1, -1, -1), (0, -1), (1, -1))
+    try:
+        porta_h(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, -1, -1), (0, -1, 1), (1, -1, 1))
+    try:
+        porta_h(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = '((-1,-1,-1),(0,0,-1),(1,-1))'
+    try:
+        t2 = porta_h(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, -1, -1), (0, 0, -1), (1, -1)]
+    try:
+        t2 = porta_h(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [[-1, -1, -1], [0, 0, -1], [1, -1]]
+    try:
+        t2 = porta_h(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ([-1, -1, -1], [0, 0, -1], [1, -1])
+    try:
+        t2 = porta_h(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, 2, -1), (0, 3, -1), (4, -1)]
+    try:
+        t2 = porta_h(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = [(-1, 2, -1), (0, 3, -1), (1, 3)]
+    try:
+        t2 = porta_h(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, '-1', -1), (0, 2, 'x'), (1, 'a'))
+    try:
+        t2 = porta_h(t, 'D')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+    t = ((-1, 'x', '-1'), ('0', 3, -1), (1, '-1'))
+    try:
+        t2 = porta_h(t, 'E')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+
+
+"""
+Main code
+"""
 def add_x(tabuleiro):
     """ Function that returns a tuple equal to the given one but with x's instead of -1. """
     tab_to_print = ()
@@ -125,755 +951,7 @@ def porta_h(tabuleiro, local):
             (tabuleiro[2][1], tabuleiro[2][0]))
 
 
-def test():
-    """ Function used to test code while being developped."""
-    # eh_tabuleiro testing
-    print('----eh_tabuleiro testing----')
-    t = ((-1, -1, -1), (0, 0, -1), (1, -1))
-    assert eh_tabuleiro(t) == True
-    t = ((-1, -1, -1), (0, 0, -1), (1, -1, 0))
-    assert eh_tabuleiro(t) == False, "Last line of puzzle with incorrect dimension"
-    t = (3)
-    assert eh_tabuleiro(t) == False, "Not a tuple"
-    
-    # tabuleiro_str testing
-    print('----tabuleiro_str testing----')
-    t = ((-1, -1, -1), (1, 1, -1), (0, -1))
-    assert tabuleiro_str(t) == '+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..1.0..|\n+-------+'
-    target = ((-1, -1, -1), (0, 0, -1), (0, -1))
-    print(tabuleiro_str(target))
-    assert tabuleiro_str(target) == '+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..0.0..|\n+-------+'
-    try:
-        print(tabuleiro_str(((-1, -1, -1), (0, 0, -1), (-1, -1, -1))))
-    except ValueError as ve:
-        print(ve)
-    
-    # tabuleiros_iguais testing
-    print('----tabuleiros_iguais testing----')
-    p1 = ((-1, -1, -1), (1, 1, -1), (0, -1))
-    print(tabuleiro_str(p1))
-    assert tabuleiros_iguais(p1, p1) == True, "Should be equal"
-    assert tabuleiros_iguais(p1, target) == False, "They are different"
-    p2 = ((-1, -1, -1), (0, 0, -1), (0, -1))
-    assert tabuleiros_iguais(p2, target) == True, "Should be equal"
-    try:
-        tabuleiros_iguais((-1, -1, -1), target)
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiros_iguais([-1, -1, -1], target)
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiros_iguais(tuple(), target)
-    except ValueError as ve:
-        print(ve)
-
-    # Porta_x Testing
-    print("----porta_x testing----")
-    p2 = porta_x(p1, "E")
-    print(tabuleiro_str(p2))
-    p3 = porta_x(p2, "D")
-    print(tabuleiro_str(p3))
-    try:
-        p = porta_x(p2, "X")
-    except ValueError as ve:
-        print(ve)
-
-    # Porta_z Testing
-    print("----porta_z testing----")
-    p7 = ((1, -1, 1), (-1, -1, -1), (-1, 0))
-    print(tabuleiro_str(p7))
-    p8 = porta_z(p7, "E")
-    print(tabuleiro_str(p8))
-    p9 = porta_z(p8, "D")
-    print(tabuleiro_str(p9))
-    try:
-        p = porta_z(p9, "X")
-    except ValueError as ve:
-        print(ve)
-
-    # Porta_h testing
-    print("----porta_h testing----")
-    p4 = ((-1, -1, -1), (0, -1, 0), (-1, 0))
-    print(tabuleiro_str(p4))
-    p5 = porta_h(p4, "E")
-    print(tabuleiro_str(p5))
-    p6 = porta_h(p5, "D")
-    print(tabuleiro_str(p6))
-    try:
-        p = porta_h(p6, "X")
-    except ValueError as ve:
-        print(ve)
-
-
-def final_tests():
-    """ Function to validate the code.
-        Test when code is completed.
-    """
-    print("----Testing eh_tabuleiro----")
-    t=((-1,-1,-1),(0,0,-1),(1,-1))
-    assert eh_tabuleiro(t) == True
-    t=(('-1','-1','-1'),('0','0','-1'),('1','-1'))
-    assert eh_tabuleiro(t) == False
-    t=(('2','-1','6'),('0','2','-1'),('1','-1'))
-    assert eh_tabuleiro(t) == False
-    t=((),(),())
-    assert eh_tabuleiro(t) == False
-    t=('()','()','()')
-    assert eh_tabuleiro(t) == False
-    t=([],[],[])
-    assert eh_tabuleiro(t) == False
-    t=((2,-1,6),(0,2,-1),(1,-1))
-    assert eh_tabuleiro(t) == False
-    t=((-1,-1,-1),(0,0,-1),(1,-1),())
-    assert eh_tabuleiro(t) == False
-    t=((-1,-1,-1),(1,-1))
-    assert eh_tabuleiro(t) == False
-    t=((-1,-1,-1,-1),(0,0,-1),(1,-1))
-    assert eh_tabuleiro(t) == False
-    t=((-1,-1,-1),(0,0,-1,-1),(1,-1))
-    assert eh_tabuleiro(t) == False
-    t=((-1,-1,-1),(0,0,-1),(1,-1,-1))
-    assert eh_tabuleiro(t) == False
-    t=[(-1,-1,-1),(0,0,-1),(1,-1)]
-    assert eh_tabuleiro(t) == False
-    t=([-1,-1,-1],[0,0,-1],[1,-1])
-    assert eh_tabuleiro(t) == False
-    t=[[-1,-1,-1],[0,0,-1],[1,-1]]
-    assert eh_tabuleiro(t) == False
-    t='((-1,-1,-1),(0,0,-1),(1,-1))'
-    assert eh_tabuleiro(t) == False
-    t=()
-    assert eh_tabuleiro(t) == False
-    t=[]
-    assert eh_tabuleiro(t) == False
-    t=((1,-1),(0,0,-1),(-1,-1,-1))
-    assert eh_tabuleiro(t) == False
-    t=[(-1,-1,-1),(0,0,-1)]
-    assert eh_tabuleiro(t) ==	False
-
-    print("----Testing tabuleiro_str----")
-    assert tabuleiro_str(((-1, -1, -1), (0, -1, 0), (-1, 0)))=='+-------+\n|...x...|\n|..x.0..|\n|.x.x.0.|\n|..0.x..|\n+-------+'
-    assert tabuleiro_str(((-1, -1, -1), (0, -1, 1), (-1, 1)))=='+-------+\n|...x...|\n|..x.1..|\n|.x.x.1.|\n|..0.x..|\n+-------+'
-    assert tabuleiro_str(((-1, -1, -1), (0, 0, -1), (0, -1)))=='+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..0.0..|\n+-------+'
-    assert tabuleiro_str(((-1, -1, -1), (0, 1, -1), (1, -1)))=='+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..0.1..|\n+-------+'
-    assert tabuleiro_str(((-1, -1, -1), (1, -1, 0), (-1, 1)))=='+-------+\n|...x...|\n|..x.0..|\n|.x.x.1.|\n|..1.x..|\n+-------+'
-    assert tabuleiro_str(((-1, -1, -1), (1, -1, 1), (-1, 0)))=='+-------+\n|...x...|\n|..x.1..|\n|.x.x.0.|\n|..1.x..|\n+-------+'
-    assert tabuleiro_str(((-1, -1, -1), (1, 0, -1), (1, -1)))=='+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..1.1..|\n+-------+'
-    assert tabuleiro_str(((-1, -1, -1), (1, 1, -1), (0, -1)))=='+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..1.0..|\n+-------+'
-    assert tabuleiro_str(((0, -1, 0), (-1, -1, -1), (-1, 0)))=='+-------+\n|...0...|\n|..x.x..|\n|.0.x.0.|\n|..x.x..|\n+-------+'
-    assert tabuleiro_str(((0, -1, 1), (-1, -1, -1), (-1, 1)))=='+-------+\n|...1...|\n|..x.x..|\n|.0.x.1.|\n|..x.x..|\n+-------+'
-    assert tabuleiro_str(((0, 0, -1), (-1, -1, -1), (0, -1)))=='+-------+\n|...x...|\n|..0.x..|\n|.0.x.x.|\n|..x.0..|\n+-------+'
-    assert tabuleiro_str(((0, 1, -1), (-1, -1, -1), (1, -1)))=='+-------+\n|...x...|\n|..1.x..|\n|.0.x.x.|\n|..x.1..|\n+-------+'
-    assert tabuleiro_str(((1, -1, 0), (-1, -1, -1), (-1, 1)))=='+-------+\n|...0...|\n|..x.x..|\n|.1.x.1.|\n|..x.x..|\n+-------+'
-    assert tabuleiro_str(((1, -1, 1), (-1, -1, -1), (-1, 0)))=='+-------+\n|...1...|\n|..x.x..|\n|.1.x.0.|\n|..x.x..|\n+-------+'
-    assert tabuleiro_str(((1, 0, -1), (-1, -1, -1), (1, -1)))=='+-------+\n|...x...|\n|..0.x..|\n|.1.x.x.|\n|..x.1..|\n+-------+'
-    assert tabuleiro_str(((1, 1, -1), (-1, -1, -1), (0, -1)))=='+-------+\n|...x...|\n|..1.x..|\n|.1.x.x.|\n|..x.0..|\n+-------+'
-    assert tabuleiro_str(((-1, -1, -1), (0, 0, -1), (0, -1)))!='+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..0.0..|\n+-------+\n'
-    assert tabuleiro_str(((-1, -1, -1), (0, 1, -1), (1, -1)))!='+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..0.1..|\n+-------+ '
-    assert tabuleiro_str(((-1, -1, -1), (0, 1, -1), (1, -1)))!='+_______+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..0.1..|\n+_______+'
-    try:
-        tabuleiro_str(((1,-1,-1,-1),(-1,-1,-1),(1,0)))
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str(((1,-1,-1),(-1,-1,-1,-1),(1,0)))
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str(((1,-1,-1),(-1,-1,-1),(1,0,1)))
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str((('1','-1','-1'),('-1','-1','-1'),('1','0','1')))
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str((((),(),()),((),(),()),((),())))
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str(((2,-1,6),(0,2,-1),(1,-1)))
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str(([-1,-1,-1],[0,0,-1],[1,-1]))
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str([[-1,-1,-1],[0,0,-1],[1,-1]])
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str([(-1,-1,-1),(0,0,-1),(1,-1)])
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str([(-1,-1,-1),(0,0,-1),(1,-1)])
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str('((-1,-1,-1),(0,0,-1),(1,-1))')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    try:
-        tabuleiro_str(((1,-1),(0,0,-1),(-1,-1,-1)))
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    
-    print("----Testing tabuleiros_iguais----")
-    t1=((-1,-1,-1),(0,0,-1),(1,-1))
-    t2=((-1,-1,-1),(0,0,-1),(1,-1))
-    assert tabuleiros_iguais(t1,t2) == True
-    t1=((0,-1,-1),(0,0,-1),(1,-1))
-    t2=((-1,-1,-1),(0,0,-1),(1,-1))
-    assert tabuleiros_iguais(t1,t2) == False
-    t1=((-2,-1,-1),(0,0,-1),(1,-1))
-    t2=((-1,-1,-1),(0,0,-1),(1,-1))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((-1,-1,-1),(0,'x',-1),(1,-1))
-    t2=((-1,-1,-1),(0,0,-1),(1,-1))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((-1,-1,-1),(0,0,-1),(1,-1))
-    t2=((-2,-1,-1),(0,0,-1),(1,-1))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t2=((-1,-1,-1),(0,0,-1),(1,-1))
-    t1=((-2,-1,-1),(0,0,-1),(1,-1))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((-1,-1,-1),(0,0,-1),(1,-1))
-    t2=((-1,-1,-1),(0,'x',-1),(1,-1))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1='((-1,-1,-1),(0,0,-1),(1,-1))'
-    t2='((-1,-1,-1),(0,0,-1),(1,-1))'
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=[(-1,-1,-1),(0,0,-1),(1,-1)]
-    t2=[(-1,-1,-1),(0,0,-1),(1,-1)]
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=([-1,-1,-1],[0,0,-1],[1,-1])
-    t2=([-1,-1,-1],[0,0,-1],[1,-1])
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=[[-1,-1,-1],[0,0,-1],[1,-1]]
-    t2=[[-1,-1,-1],[0,0,-1],[1,-1]]
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=[[-1,-1,-1],[0,0,-1],[1,-1]]
-    t2=[[-1,-1,-1],[0,0,-1],[1,-1,1]]
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1='0'
-    t2='0'
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=()
-    t2=()
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((1,),(1,),(1,))
-    t2=((1,),(1,),(1,))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((2,3,4),(4,5,6),(7,8))
-    t2=((2,3,4),(4,5,6),(7,8))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((-1,-1,-1),(0,0,-1),(1,1,-1))
-    t2=((-1,-1,-1),(0,0,-1),(1,1,-1))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((-1,-1,-1),(0,-1),(1,-1))
-    t2=((-1,-1,-1),(0,-1),(1,-1))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((-1,-1,-1),(0,0,-1),(1,))
-    t2=((-1,-1,-1),(0,0,-1),(1,))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t1=((-1,-1),(0,0,-1),(1,-1))
-    t2=((-1,-1),(0,0,-1),(1,-1))
-    try:
-        tabuleiros_iguais(t1,t2)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    
-    print("----Testing porta_x----")
-    t=((-1,-1,-1),(0,0,-1),(1,-1))
-    try:
-        porta_x(t,1)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(1,-1))
-    try:
-        porta_x(t,'ES')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(1,-1))
-    try:
-        porta_x(t,())
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(1,-1))
-    try:
-        porta_x(t,[])
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(1,-1))
-    type(porta_x(t,'D')) == tuple
-    assert porta_x(((-1,-1,-1),(0,-1,0),(-1,0)),"D")==((-1,-1,-1),(0,-1,0),(-1,0))
-    assert porta_x(((-1,-1,-1),(0,-1,0),(-1,0)),"E")==((-1,-1,-1),(1,-1,1),(-1,0))
-    assert porta_x(((-1,-1,-1),(0,0,-1),(0,-1)),"D")==((-1,-1,-1),(0,1,-1),(1,-1))
-    assert porta_x(((-1,-1,-1),(0,0,-1),(0,-1)),"E")==((-1,-1,-1),(1,1,-1),(0,-1))
-    assert porta_x(((-1,-1,-1),(0,1,-1),(1,-1)),"D")==((-1,-1,-1),(0,0,-1),(0,-1))
-    assert porta_x(((-1,-1,-1),(0,1,-1),(1,-1)),"E")==((-1,-1,-1),(1,0,-1),(1,-1))
-    assert porta_x(((-1,-1,-1),(1,-1,0),(-1,1)),"D")==((-1,-1,-1),(1,-1,0),(-1,1))
-    assert porta_x(((-1,-1,-1),(1,-1,0),(-1,1)),"E")==((-1,-1,-1),(0,-1,1),(-1,1))
-    assert porta_x(((-1,-1,-1),(1,0,-1),(1,-1)),"D")==((-1,-1,-1),(1,1,-1),(0,-1))
-    assert porta_x(((-1,-1,-1),(1,0,-1),(1,-1)),"E")==((-1,-1,-1),(0,1,-1),(1,-1))
-    assert porta_x(((-1,-1,-1),(1,1,-1),(0,-1)),"D")==((-1,-1,-1),(1,0,-1),(1,-1))
-    assert porta_x(((-1,-1,-1),(1,1,-1),(0,-1)),"E")==((-1,-1,-1),(0,0,-1),(0,-1))
-    assert porta_x(((0,0,-1),(-1,-1,-1),(0,-1)),"D")==((0,1,-1),(-1,-1,-1),(1,-1))
-    assert porta_x(((0,0,-1),(-1,-1,-1),(0,-1)),"E")==((0,0,-1),(-1,-1,-1),(0,-1))
-    assert porta_x(((0,1,-1),(-1,-1,-1),(1,-1)),"D")==((0,0,-1),(-1,-1,-1),(0,-1))
-    assert porta_x(((0,1,-1),(-1,-1,-1),(1,-1)),"E")==((0,1,-1),(-1,-1,-1),(1,-1))
-    assert porta_x(((1,1,-1),(-1,-1,-1),(0,-1)),"D")==((1,0,-1),(-1,-1,-1),(1,-1))
-    assert porta_x(((1,1,-1),(-1,-1,-1),(0,-1)),"E")==((1,1,-1),(-1,-1,-1),(0,-1))
-    t=((-1,-1,-1),(0,-1),(1,-1))
-    try:
-        porta_x(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,-1,1),(1,-1,1))
-    try:
-        porta_x(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t='((-1,-1,-1),(0,0,-1),(1,-1))'
-    try:
-        porta_x(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=[(-1,-1,-1),(0,0,-1),(1,-1)]
-    try:
-        porta_x(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=[[-1,-1,-1],[0,0,-1],[1,-1]]
-    try:
-        porta_x(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=([-1,-1,-1],[0,0,-1],[1,-1])
-    try:
-        porta_x(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=[(-1,2,-1),(0,3,-1),(4,-1)]
-    try:
-        porta_x(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=[(-1,2,-1),(0,3,-1),(1,3)]
-    try:
-        porta_x(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,'x','-1'),('0',3,-1),(1,'-1'))
-    try:
-        porta_x(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-
-    print("----Testing porta_z----")
-    t = ((0, -1, 4), (-1, -1, -1), (-1, 0))
-    try:
-        porta_z(t, 1)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    try:
-        porta_z(t, 'A')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    try:
-        porta_z(t, ())
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    try:
-        porta_z(t, [])
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    try:
-        porta_z(t, 'h')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'E')
-    assert t2[0][2] == 1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'E')
-    assert t2[0][1] == -1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'E')
-    assert t2[0][0] == 1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'E')
-    assert t2[0][1] == -1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'E')
-    assert t2[1][2] == -1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'E')
-    assert t2[2][1] == 0
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'D')
-    assert t2[0][2] == 1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'D')
-    assert t2[1][2] == -1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'D')
-    assert t2[2][1] == 1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'D')
-    assert t2[0][1] == -1
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'D')
-    assert t2[0][0] == 0
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'D')
-    assert t2[0][1] != 'x'
-    assert porta_z(((-1, -1, -1), (0, 1, -1), (1, -1)),"D") == ((-1, -1, -1), (0, 1, -1), (1, -1))
-    assert porta_z(((-1, -1, -1), (0, 1, -1), (1, -1)),"E") == ((-1, -1, -1), (0, 1, -1), (1, -1))
-    assert porta_z(((-1, -1, -1), (1, -1, 1), (-1, 0)),"D") == ((-1, -1, -1), (1, -1, 0), (-1, 1))
-    assert porta_z(((-1, -1, -1), (1, -1, 1), (-1, 0)),"E") == ((-1, -1, -1), (1, -1, 1), (-1, 0))
-    assert porta_z(((-1, -1, -1), (1, 0, -1), (1, -1)),"D") == ((-1, -1, -1), (1, 0, -1), (1, -1))
-    assert porta_z(((-1, -1, -1), (1, 0, -1), (1, -1)),"E") == ((-1, -1, -1), (1, 0, -1), (1, -1))
-    assert porta_z(((0, -1, 0), (-1, -1, -1), (-1, 0)),"D") == ((0, -1, 1), (-1, -1, -1), (-1, 1))
-    assert porta_z(((0, -1, 0), (-1, -1, -1), (-1, 0)),"E") == ((1, -1, 1), (-1, -1, -1), (-1, 0))
-    assert porta_z(((0, -1, 1), (-1, -1, -1), (-1, 1)),"D") == ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    assert porta_z(((0, -1, 1), (-1, -1, -1), (-1, 1)),"E") == ((1, -1, 0), (-1, -1, -1), (-1, 1))
-    assert porta_z(((0, 0, -1), (-1, -1, -1), (0, -1)),"D") == ((0, 0, -1), (-1, -1, -1), (0, -1))
-    assert porta_z(((0, 0, -1), (-1, -1, -1), (0, -1)),"E") == ((1, 1, -1), (-1, -1, -1), (0, -1))
-    assert porta_z(((1, -1, 0), (-1, -1, -1), (-1, 1)),"D") == ((1, -1, 1), (-1, -1, -1), (-1, 0))
-    assert porta_z(((1, -1, 0), (-1, -1, -1), (-1, 1)),"E") == ((0, -1, 1), (-1, -1, -1), (-1, 1))
-    assert porta_z(((1, -1, 1), (-1, -1, -1), (-1, 0)),"D") == ((1, -1, 0), (-1, -1, -1), (-1, 1))
-    assert porta_z(((1, 1, -1), (-1, -1, -1), (0, -1)),"E") == ((0, 0, -1), (-1, -1, -1), (0, -1))
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    assert type(porta_z(t, 'D')) == tuple
-    t = ((0, -1, 0), (-1, -1, -1), (-1, 0))
-    t2 = porta_z(t, 'D')
-    t3 = porta_z(t, 'E')
-    assert t2[0][2] == t3[0][2]
-    t = ((-1, -1, -1), (0, -1), (1, -1))
-    try:
-        porta_z(t, 'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ((-1, -1, -1), (0, -1, 1), (1, -1, 1))
-    try:
-        porta_z(t, 'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ((-1, -1, -1, -1), (0, -1, 1), (1, -1))
-    try:
-        porta_z(t, 'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = '((-1,-1,-1),(0,0,-1),(1,-1))'
-    try:
-        t2 = porta_z(t, 'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = [(-1, -1, -1), (0, 0, -1), (1, -1)]
-    try:
-        t2 = porta_z(t, 'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = [[-1, -1, -1], [0, 0, -1], [1, -1]]
-    try:
-        t2 = porta_z(t, 'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ([-1, -1, -1], [0, 0, -1], [1, -1])
-    try:
-        t2 = porta_z(t, 'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = [(-1, 2, -1), (0, 3, -1), (4, -1)]
-    try:
-        t2 = porta_z(t, 'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = [(-1, 2, -1), (0, 3, -1), (1, 3)]
-    try:
-        t2 = porta_z(t, 'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t = ((-1, '-1', -1), (0, 2, 'x'), (1, 'a'))
-    try:
-        t2 = porta_z(t, 'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    print("----Testing porta_h----")
-
 
 if __name__ == "__main__":
-    # test()
-    final_tests()
-
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    try:
-        porta_h(t,1)
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    try:
-        porta_h(t,'A')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    try:
-        porta_h(t,())
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    try:
-        porta_h(t,[])
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    try:
-        porta_h(t,'z')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'E')
-    assert t2[1][1]==-1
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'E')
-    assert t2[1][0]==-1
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'E')
-    assert t2[2][0]==0
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'E')
-    assert t2[0][0]==0
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'E')
-    assert t2[0][1]==0
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'E')
-    assert t2[0][2]==-1
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'E')
-    assert t2[0][2]!='x'
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'E')
-    assert t2[2][1]==-1
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'D')
-    assert t2[1][1]==-1
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'D')
-    assert t2[2][0]==-1
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'D')
-    assert t2[2][1]==0
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'D')
-    assert t2[1][2]==0
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'D')
-    assert t2[0][2]==-1
-    assert porta_h(((-1,-1,-1),(0,-1,1),(-1,1)),"D")==((-1,-1,-1),(0,1,-1),(1,-1))
-    assert porta_h(((-1,-1,-1),(0,-1,1),(-1,1)),"E")==((0,-1,1),(-1,-1,-1),(-1,1))
-    assert porta_h(((-1,-1,-1),(0,0,-1),(0,-1)),"D")==((-1,-1,-1),(0,-1,0),(-1,0))
-    assert porta_h(((-1,-1,-1),(0,0,-1),(0,-1)),"E")==((0,0,-1),(-1,-1,-1),(0,-1))
-    assert porta_h(((-1,-1,-1),(1,1,-1),(0,-1)),"D")==((-1,-1,-1),(1,-1,1),(-1,0))
-    assert porta_h(((-1,-1,-1),(1,1,-1),(0,-1)),"E")==((1,1,-1),(-1,-1,-1),(0,-1))
-    assert porta_h(((0,-1,0),(-1,-1,-1),(-1,0)),"D")==((0,0,-1),(-1,-1,-1),(0,-1))
-    assert porta_h(((0,-1,0),(-1,-1,-1),(-1,0)),"E")==((-1,-1,-1),(0,-1,0),(-1,0))
-    assert porta_h(((0,-1,1),(-1,-1,-1),(-1,1)),"D")==((0,1,-1),(-1,-1,-1),(1,-1))
-    assert porta_h(((0,-1,1),(-1,-1,-1),(-1,1)),"E")==((-1,-1,-1),(0,-1,1),(-1,1))
-    assert porta_h(((0,0,-1),(-1,-1,-1),(0,-1)),"D")==((0,-1,0),(-1,-1,-1),(-1,0))
-    assert porta_h(((0,0,-1),(-1,-1,-1),(0,-1)),"E")==((-1,-1,-1),(0,0,-1),(0,-1))
-    assert porta_h(((0,1,-1),(-1,-1,-1),(1,-1)),"D")==((0,-1,1),(-1,-1,-1),(-1,1))
-    assert porta_h(((0,1,-1),(-1,-1,-1),(1,-1)),"E")==((-1,-1,-1),(0,1,-1),(1,-1))
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    assert type(porta_h(t,'D'))==tuple
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'D')
-    t3=porta_h(t,'E')
-    assert t2[1][2]==t3[0][1]
-    t=((-1,-1,-1),(0,0,-1),(0,-1))
-    t2=porta_h(t,'D')
-    t3=porta_h(t,'E')
-    assert t2[1][1]==t3[1][1]
-    t=((-1,-1,-1),(0,-1),(1,-1))
-    try:
-        porta_h(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,-1,-1),(0,-1,1),(1,-1,1))
-    try:
-        porta_h(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t='((-1,-1,-1),(0,0,-1),(1,-1))'
-    try:
-        t2=porta_h(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=[(-1,-1,-1),(0,0,-1),(1,-1)]
-    try:
-        t2=porta_h(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=[[-1,-1,-1],[0,0,-1],[1,-1]]
-    try:
-        t2=porta_h(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=([-1,-1,-1],[0,0,-1],[1,-1])
-    try:
-        t2=porta_h(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=[(-1,2,-1),(0,3,-1),(4,-1)]
-    try:
-        t2=porta_h(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=[(-1,2,-1),(0,3,-1),(1,3)]
-    try:
-        t2=porta_h(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,'-1',-1),(0,2,'x'),(1,'a'))
-    try:
-        t2=porta_h(t,'D')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
-    t=((-1,'x','-1'),('0',3,-1),(1,'-1'))
-    try:
-        t2=porta_h(t,'E')
-        raise Exception
-    except ValueError as ve:
-        print(ve)
+    tests()
+    #final_tests()
