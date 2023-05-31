@@ -1,4 +1,6 @@
-
+"""
+Auxiliarity functions imported from the part1
+"""
 
 def add_x(tabuleiro):
     """ Function that returns a tuple equal to the given one but with x's instead of -1. """
