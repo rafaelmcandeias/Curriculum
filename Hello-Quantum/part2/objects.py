@@ -17,6 +17,11 @@ class Celula:
         if self.value == -1:
             return 'x'
         return str(self.value)
+    
+    def invert(self):
+        if self.value != 1:
+            self.value = 1 - self.value
+        return self.value
 
 
 class Coordenada:
@@ -47,20 +52,61 @@ class Tabuleiro:
     A board corresponds to a matrix with 3 rows and 3 columns
     """
     def __init__(self) -> None:
-        self.tab = [[-1, -1, -1], [-1, -1, -1], [None, -1]]
+        self.tab = ((Celula(-1), Celula(-1), Celula(-1)),
+                    (Celula(0), Celula(0), Celula(-1)),
+                    (Celula(0), Celula(-1)))
     
     def cpy_str(self, string) -> None:
         parts = string[1:-1].split(', ')
         for i in (0, 3, 6):
-            parts[i] = parts[0][1:]
+            parts[i] = parts[i][1:]
         for i in (2, 5, 7):
-            parts[i] = parts[0][:-1]
+            parts[i] = parts[i][:-1]
 
         for index in range(len(parts)):
             if parts[index] not in ('-1', '0', '1'):
                 raise ValueError('str_para_tabuleiro: argumentos invalidos')
-            parts[index] = eval(parts[index])
+            parts[index] = Celula(eval(parts[index]))
 
-        self.tab[0] = parts[:3]
-        self.tab[1] = parts[3:6]
-        self.tab[2] = parts[6:]
+        # convert from tuple to list for easier manipulation
+        list_tab = list(list(sub) for sub in self.tab)
+
+        list_tab[0] = parts[:3]
+        list_tab[1] = parts[3:6]
+        list_tab[2] = parts[6:]
+
+        # store again as a tuple
+        self.tab = tuple(tuple(sub) for sub in list_tab)
+        return self
+    
+    def get_lines(self):
+        return 3
+    
+    def get_columns(self):
+        return 3
+
+    def get_tab(self):
+        return self.tab
+    
+    def get_celula(self, coord):
+        return self.tab[coord.get_line()][coord.get_column()]
+    
+    def update_cel(self, cel, coord):
+        self.tab[coord.get_line()][coord.get_column()] = cel
+        return self
+    
+    def invert_on_coord(self, coord):
+        self.tab[coord.get_line()][coord.get_column()].invert()
+        return self
+    
+    def is_tab(self):
+        if not isinstance(self.tab, tuple):
+            return False
+
+        for coll in self.tab:
+            if not isinstance(coll, tuple):
+                return False
+        for val in coll:
+            if not isinstance(val, Celula):
+                return False
+        return True

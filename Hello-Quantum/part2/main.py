@@ -147,6 +147,79 @@ def tabuleiro_dimensao(t):
     """ Returns the natural corresponding to the number of lines (and, consequently,
     also the number of columns) existing in t.
     """
+    return str(t.get_lines()) + ', ' + str(t.get_columns())
+
+
+def tabuleiro_celula(t, coord):
+    """ Returns the cell present in the color coordinate of the t board.
+    
+    Args: Tabuleiro and Coordinadas
+    """
+    return t.get_celula(coord)
+
+
+def tabuleiro_substitui_celula(t, cel, coord):
+    """ Returns the board that results from replacing the existing cell in the coor coordinate of the board,
+    with the new cell. Your function must verify the correctness of the arguments, generating a
+    ValueError with the message: 'tabuleiro_substitui_celula: argumentos invalidos'
+    
+    Args: Tabuleiro, Celula and Coordinate
+    """
+    if not eh_tabuleiro(t) or not eh_celula(cel) or not eh_coordenada(coord):
+        raise ValueError('tabuleiro_substitui_celula: argumentos invalidos')
+    return t.update_cel(cel, coord)
+
+
+def tabuleiro_inverte_estado(t, coord):
+    """ Returns the board that results from inverting the state of the cell present in the coor coordinate of
+    the board. Your function must check the correctness of the arguments, generating a
+    ValueError with the message: 'tabuleiro_inverte_estado: argumentos invalidos'
+    
+    Args: Tabuleiro and Coordinada
+    """
+    if not eh_tabuleiro(t) or not eh_coordenada(coord):
+        raise ValueError('tabuleiro_substitui_celula: argumentos invalidos')
+    return t.invert_on_coord(coord)
+
+
+def eh_tabuleiro(arg):
+    """ Returns true only in case arg is of type tabuleiro.
+    
+    Args: Object
+    """
+    if not isinstance(arg, Tabuleiro):
+        return False
+    
+    return arg.is_tab()
+
+
+def tabuleiros_iguais(t1, t2):
+    """ Returns true only in case t1 and t2 are Tabuleiros that contain
+    equal cells in each of the coordinates
+    
+    Args: Tabuleiro and Tabuleiro
+    """
+    tab1, tab2 = t1.get_tab(), t2.get_tab()
+
+    for l in range(len(tab1)):
+        for c in range(len(tab1[l])):
+            if not celulas_iguais(tab1[l][c], tab2[l][c]):
+                return False
+    return True
+
+
+def tabuleiro_para_str(t):
+    """ Returns the character string that represents its argument.
+    The external representation is identical to the one presented in the first project
+    
+    Args: Tabuleiro
+    """
+    return '+-------+\n|...{}...|\n|..{}.{}..|\n|.{}.{}.{}.|\n|..{}.{}..|\n+-------+'.format(
+        t.get_celula(Coordenada(0, 2)).__str__(),
+        t.get_celula(Coordenada(0, 1)).__str__(), t.get_celula(Coordenada(1, 2)).__str__(),
+        t.get_celula(Coordenada(0, 0)).__str__(), t.get_celula(Coordenada(1, 1)).__str__(), t.get_celula(Coordenada(2, 1)).__str__(),
+        t.get_celula(Coordenada(1, 0)).__str__(), t.get_celula(Coordenada(2, 0)).__str__()
+    )
 
 
 """
@@ -187,7 +260,17 @@ def teste2():
 
 
 def teste3():
-    pass
+    t0 = tabuleiro_inicial()
+    assert tabuleiro_para_str(t0) == '+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..0.0..|\n+-------+'
+    t2 = str_para_tabuleiro('((-1, -1, -1), (0, 1, -1), (1, -1))')
+    assert tabuleiro_para_str(t2) == '+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..0.1..|\n+-------+'
+    assert celula_para_str(tabuleiro_celula(t0, cria_coordenada(0,0))) == 'x'
+    assert celula_para_str(tabuleiro_celula(t0, cria_coordenada(1,1))) == '0'
+    assert eh_tabuleiro(t0) == True
+    t1 = tabuleiro_inverte_estado(t0, cria_coordenada(1,1))
+    assert tabuleiro_para_str(t1) == '+-------+\n|...x...|\n|..x.x..|\n|.x.1.x.|\n|..0.0..|\n+-------+'
+    assert tabuleiros_iguais(t0, tabuleiro_inicial()) == False
+    assert tabuleiros_iguais(t0, t1) == True
 
 
 if __name__ == "__main__":
