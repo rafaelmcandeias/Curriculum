@@ -155,7 +155,7 @@ def tabuleiro_celula(t, coord):
     
     Args: Tabuleiro and Coordinadas
     """
-    return t.get_celula(coord)
+    return t.get_cel(coord)
 
 
 def tabuleiro_substitui_celula(t, cel, coord):
@@ -215,11 +215,134 @@ def tabuleiro_para_str(t):
     Args: Tabuleiro
     """
     return '+-------+\n|...{}...|\n|..{}.{}..|\n|.{}.{}.{}.|\n|..{}.{}..|\n+-------+'.format(
-        t.get_celula(Coordenada(0, 2)).__str__(),
-        t.get_celula(Coordenada(0, 1)).__str__(), t.get_celula(Coordenada(1, 2)).__str__(),
-        t.get_celula(Coordenada(0, 0)).__str__(), t.get_celula(Coordenada(1, 1)).__str__(), t.get_celula(Coordenada(2, 1)).__str__(),
-        t.get_celula(Coordenada(1, 0)).__str__(), t.get_celula(Coordenada(2, 0)).__str__()
+        t.get_cel(Coordenada(0, 2)).__str__(),
+        t.get_cel(Coordenada(0, 1)).__str__(), t.get_cel(Coordenada(1, 2)).__str__(),
+        t.get_cel(Coordenada(0, 0)).__str__(), t.get_cel(Coordenada(1, 1)).__str__(), t.get_cel(Coordenada(2, 1)).__str__(),
+        t.get_cel(Coordenada(1, 0)).__str__(), t.get_cel(Coordenada(2, 0)).__str__()
     )
+
+
+def porta_x(t, p):
+    """ Returns the board resulting from applying the X gate to the bottom
+    cell of the left or right qubit, depending on whether p is 'E' or 'D', respectively.
+    The function must check the validity of its arguments, generating
+    a ValueError with the message: 'porta_x: argumentos invalidos.'
+    
+    Args: Tabuleiro and Porta direction for the operation
+    """
+    if not eh_tabuleiro(t) or not isinstance(p, str) or p not in ('E', 'D'):
+        raise ValueError('porta_x: argumentos invalidos.')
+    
+    if p == 'E':
+        coords = Coordenada(1, 0), Coordenada(1, 1), Coordenada(1, 2)
+    else:
+        coords = Coordenada(0, 1), Coordenada(1, 1), Coordenada(2, 0)
+    
+    for c in coords:
+        t.invert_on_coord(c)
+    
+    return t
+
+
+def porta_z(t, p):
+    """ Returns the board resulting from applying the Z gate to the top cell
+    of the left or right qubit, depending on whether p is 'E' or 'D', respectively.
+    The function must check the validity of its arguments,
+    generating a ValueError with the message: 'porta_z: argumentos invalidos.'
+    
+    Args: Tabuleiro and Porta direction for the operation
+    """
+    if not eh_tabuleiro(t) or not isinstance(p, str) or p not in ('E', 'D'):
+        raise ValueError('porta_x: argumentos invalidos.')
+
+    if p == 'E':
+        coords = Coordenada(0, 0), Coordenada(0, 1), Coordenada(0, 2)
+    else:
+        coords = Coordenada(0, 2), Coordenada(1, 2), Coordenada(2, 1)
+
+    for c in coords:
+        t.invert_on_coord(c)
+
+    return t
+
+
+def porta_h(t, p):
+    """ Returns the board resulting from applying the H gate to the left or right qubit,
+    depending on whether p is 'E' or 'D', respectively. The function must check
+    the validity of its arguments, generating a ValueError with the
+    message: 'porta_h: argumentos invalidos.'
+    
+    Args: Tabuleiro and Porta direction for the operation
+    """
+    if not eh_tabuleiro(t) or not isinstance(p, str) or p not in ('E', 'D'):
+        raise ValueError('porta_x: argumentos invalidos.')
+    
+    new_tabuleiro = t.cpy()
+
+    if p == 'E':
+        top_coords = ((0, 0), (0, 1), (0, 2))
+        bottom_coords = ((1, 0), (1, 1), (1, 2))
+    
+    else:
+        top_coords = ((0, 2), (1, 2), (2, 1))
+        bottom_coords = ((0, 1), (1, 1), (2, 0))
+    
+    # update top line
+    for index in range(len(top_coords)):
+        top_coord = Coordenada(top_coords[index][0], top_coords[index][1])
+        bottom_coord = Coordenada(bottom_coords[index][0], bottom_coords[index][1])
+        bottom_cel = t.get_cel(bottom_coord)
+        new_tabuleiro.cpy_cel(top_coord, bottom_cel)
+    
+    # update bottom line
+    for index in range(len(bottom_coords)):
+        bottom_coord = Coordenada(bottom_coords[index][0], bottom_coords[index][1])
+        top_coord = Coordenada(top_coords[index][0], top_coords[index][1])
+        top_cel = t.get_cel(top_coord)
+        new_tabuleiro.cpy_cel(bottom_coord, top_cel)
+
+    return new_tabuleiro
+
+
+def hello_quantum(string):
+    """ Main game function that allows you to play a complete game of Hello Quantum.
+    The hello_quantum function receives a character string containing the description
+    of the objective board and the maximum number of moves. The function returns true if
+    the player manages to transform the initial board into the objective board, not
+    exceeding the indicated number of moves, and returns false otherwise.
+    The maximum number of moves is displayed immediately after the objective board
+    description, separated by ':'.
+    For example, hello_quantum('((-1, -1, -1), (0, 1, -1), (1, -1)):1').
+    """
+    print('Bem-vindo ao Hello Quantum!')
+    print('O seu objetivo e chegar ao tabuleiro:')
+    
+    game_str, max_plays = string.split(':')
+    final_tab = str_para_tabuleiro(game_str)
+    
+    print(tabuleiro_para_str(final_tab))
+    print('Comecando com o tabuleiro que se segue:')
+    tab = tabuleiro_inicial()
+    print(tabuleiro_para_str(tab))
+
+    plays = 0
+    while plays < eval(max_plays):
+        port = input('Escolha uma porta para aplicar (X, Z ou H): ')
+        direc = input('Escolha um qubit para analisar (E ou D): ')
+        if port == 'X':
+            tab = porta_x(tab, direc)
+        elif port == 'Z':
+            tab = porta_z(tab, direc)
+        else:
+            tab = porta_h(tab, direc)
+        
+        plays += 1
+        print(tabuleiro_para_str(tab))
+        
+        if tabuleiros_iguais(tab, final_tab):
+            print('Parabens, conseguiu converter o tabuleiro em ' + str(plays) + ' jogadas!')
+            return True
+    return False
 
 
 """
@@ -273,7 +396,24 @@ def teste3():
     assert tabuleiros_iguais(t0, t1) == True
 
 
+def teste4():
+    t1 = tabuleiro_inicial()
+    assert tabuleiro_para_str(t1) == '+-------+\n|...x...|\n|..x.x..|\n|.x.0.x.|\n|..0.0..|\n+-------+'
+    t2 = porta_h(t1,'D')
+    assert tabuleiro_para_str(t2) == '+-------+\n|...x...|\n|..x.0..|\n|.x.x.0.|\n|..0.x..|\n+-------+'
+    t3 = porta_h(t2,'E')
+    assert tabuleiro_para_str(t3) == '+-------+\n|...0...|\n|..x.x..|\n|.0.x.0.|\n|..x.x..|\n+-------+'
+    try:
+        t = porta_h(t2,'X')
+        raise Exception
+    except ValueError as ve:
+        print(ve)
+
+
 if __name__ == "__main__":
     #teste1()
     #teste2()
-    teste3()
+    #teste3()
+    #teste4()
+    #hello_quantum('((-1, -1, -1), (0, 1, -1), (1, -1)):1')
+    hello_quantum('((1, -1, 0), (-1, -1, -1), (-1, 1)):4')

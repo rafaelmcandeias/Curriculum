@@ -19,7 +19,7 @@ class Celula:
         return str(self.value)
     
     def invert(self):
-        if self.value != 1:
+        if self.value != -1:
             self.value = 1 - self.value
         return self.value
 
@@ -88,7 +88,7 @@ class Tabuleiro:
     def get_tab(self):
         return self.tab
     
-    def get_celula(self, coord):
+    def get_cel(self, coord):
         return self.tab[coord.get_line()][coord.get_column()]
     
     def update_cel(self, cel, coord):
@@ -103,6 +103,7 @@ class Tabuleiro:
         if not isinstance(self.tab, tuple):
             return False
 
+        # for collection in self.tab
         for coll in self.tab:
             if not isinstance(coll, tuple):
                 return False
@@ -110,3 +111,13 @@ class Tabuleiro:
             if not isinstance(val, Celula):
                 return False
         return True
+
+    def cpy_cel(self, coord, cel):
+        self.tab[coord.get_line()][coord.get_column()].set_value(cel.get_value())
+
+    def cpy(self):
+        new_t = Tabuleiro()
+        for line in range(len(self.tab)):
+            for col in range(len(self.tab[line])):
+                new_t.cpy_cel(Coordenada(line, col), self.get_cel(Coordenada(line, col)))
+        return new_t
