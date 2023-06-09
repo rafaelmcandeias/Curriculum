@@ -203,33 +203,25 @@ void *produtor(){
     while(fgets(line, sizeof(line)/sizeof(char), _inputFile)){
         if ((command = processInput(line)) != NULL){    //aqui vamos buscar a linha
             
-            //printf("MAIN MUTEX LOCKED \n");
             pthread_mutex_lock(&mutex);     
             while(_numberCommands >= MAX_COMMANDS){          //Garantir que tenho espaco no buffer
                 
-                //printf("[DEBUG] Lista esta cheia, a espera que consumam \n");
                 pthread_cond_wait(&podeProd, &mutex); //Caso contrario esperar ate ter espaco
             }
             
-            //printf("[DEBUG] P command = %s", command);
             insertCommand(command);
             pthread_cond_signal(&podeCons);                 //Avisar que adicionei um comando
             pthread_mutex_unlock(&mutex);
-            
-            //printf("MAIN MUTEX UNLOCK \n");
         }
     }
     
-    //printf("This means that there was no more command to read \n");
     pthread_mutex_lock(&mutex);     
     hasEnded = 1;
     pthread_cond_broadcast(&podeCons);                 //Avisar que adicionei um comando
     pthread_mutex_unlock(&mutex);
-
-    
-    //printf("Acabei com todos os comandos \n");
     return 0;
 }
+
 
 void *consumidor(){
     const char* command;
@@ -271,7 +263,7 @@ void start_threads(){
         errorParse("Error: reading time");
 
     //aloca memoria para varias threads/
-    _threads = malloc(sizeof(pthread_t)* _numberOfThreads);
+    _threads = malloc(sizeof(pthread_t) * _numberOfThreads);
 
     /* Create the threads */
     if (pthread_create(&_produtora, NULL, produtor, NULL) != 0)
@@ -280,6 +272,7 @@ void start_threads(){
         if (pthread_create(&_threads[i], NULL, consumidor, NULL) != 0)
             errorParse("Error: can't create thread");
     }
+
     /* Wait for threads to finish */
     if (pthread_join(_produtora, NULL) != 0)
         errorParse("Error: can't join produtora");
