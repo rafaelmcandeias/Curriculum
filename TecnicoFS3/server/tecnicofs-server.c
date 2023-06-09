@@ -154,10 +154,10 @@ int applyCommand(char* command){
 
 void *startServer() {
     while(1) {
-        struct sockaddr_un client_addr;
+        struct sockaddr client_addr;
         char command[MAX_INPUT_SIZE];
         int c, resultMessage;
-        _addrlen = sizeof(struct sockaddr_un);
+        _addrlen = sizeof(struct sockaddr);
         
 
         c = recvfrom(_sockfd, command, sizeof(command)-1, 0, &client_addr, &_addrlen);

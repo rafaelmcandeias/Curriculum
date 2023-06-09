@@ -149,7 +149,7 @@ int tfsMount(char *clientName) {
 }
 
 //Close the client's socket
-void tfsUnmount(char *socketName ) {
+void tfsUnmount(char *socketName) {
 	if (close(_sockfd) != 0)
 		errorParse("Error: can't close socket");
 	

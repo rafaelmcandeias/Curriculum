@@ -15,6 +15,6 @@ int tfsLookup(char *path);
 int tfsMove(char *from, char *to);
 int tfsPrint(char *outName);
 int tfsMount(char *clientName);
-void tfsUnmount();
+void tfsUnmount(char *socketName);
 
 #endif /* CLIENT_H */

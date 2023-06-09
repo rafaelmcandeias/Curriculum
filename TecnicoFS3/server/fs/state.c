@@ -124,7 +124,7 @@ int inode_get(int inumber, type *nType, union Data *data) {
         return FAIL;
     }
 
-    if ((inode_table[inumber].nodeType == T_NONE)){
+    if (inode_table[inumber].nodeType == T_NONE){
         printf("inode_get: invalid inumber %d\n", inumber);
         return FAIL;
     }
