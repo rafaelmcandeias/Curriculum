@@ -1,0 +1,156 @@
+Create directory: /a
+Create directory: /b
+Create directory: /a
+Create directory: /b
+Create directory: /a
+Create directory: /b
+Create directory: /a
+Create directory: /b
+Search: / found
+Search: / found
+Search: / found
+Search: /a found
+Search: /b found
+Search: / found
+Search: / found
+Search: / found
+Create directory: /a/a
+Create directory: /b/b
+Create directory: /a/c
+Create directory: /b/d
+Search: / found
+Search: / found
+Search: / found
+Search: / found
+Search: / found
+Search: / found
+Search: / found
+Search: / found
+Create directory: /a/a/a
+Create directory: /b/b/b
+Create directory: /a/c/c
+Create directory: /b/d/d
+Create directory: /a/a/b
+Create directory: /b/b/c
+Create directory: /a/c/d
+Create directory: /b/d/e
+Search: / found
+Search: / found
+Search: / found
+Search: / found
+Create file: /a/a/a/a
+Create file: /b/b/b/b
+Create file: /a/c/c/c
+Create file: /b/d/d/d
+Search: / found
+Search: / found
+Search: / found
+Search: / found
+Search: /a found
+Search: /b found
+Search: /a found
+Search: /b found
+Search: / found
+Search: / found
+Create directory: /a/a/b/c1
+Search: / found
+Create directory: /b/b/b/d1
+Create directory: /a/a/a/b1
+Create directory: /b/b/c/e1
+Create directory: /a/c/c/f1
+Create directory: /a/c/d/g1
+Create directory: /b/d/d/h1
+Create directory: /b/d/e/i1
+Search: / found
+Search: / found
+Create directory: /a/a/a/b2
+Create directory: /a/a/b/c2
+Create directory: /b/b/b/d2
+Create directory: /b/b/c/e2
+Create directory: /a/c/c/f2
+Create directory: /a/c/d/g2
+Create directory: /b/d/d/h2
+Create directory: /b/d/e/i2
+Search: / found
+Delete: /a/a/a/b1
+Delete: /a/a/b/c1
+Delete: /b/b/b/d1
+Delete: /b/b/c/e1
+Delete: /a/c/c/f1
+Delete: /a/c/d/g1
+Delete: /b/d/d/h1
+Delete: /b/d/e/i1
+Search: / found
+Search: / found
+Delete: /a/a/a/b2
+Delete: /a/a/b/c2
+Delete: /b/b/b/d2
+Delete: /b/b/c/e2
+Delete: /a/c/c/f2
+Delete: /a/c/d/g2
+Delete: /b/d/d/h2
+Delete: /b/d/e/i2
+Search: / found
+Search: / found
+Create directory: /a/a/a/b3
+Create directory: /a/a/b/c3
+Create directory: /b/b/b/d3
+Create directory: /b/b/c/e3
+Create directory: /a/c/c/f3
+Create directory: /a/c/d/g3
+Create directory: /b/d/d/h3
+Create directory: /b/d/e/i3
+Search: / found
+Search: / found
+Create directory: /a/a/a/b4
+Create directory: /a/a/b/c4
+Create directory: /b/b/b/d4
+Create directory: /b/b/c/e4
+Create directory: /a/c/c/f4
+Create directory: /a/c/d/g4
+Create directory: /b/d/d/h4
+Create directory: /b/d/e/i4
+Search: / found
+Search: / found
+Delete: /a/a/a/b3
+Delete: /a/a/b/c3
+Delete: /b/b/b/d3
+Delete: /b/b/c/e3
+Delete: /a/c/c/f3
+Delete: /a/c/d/g3
+Delete: /b/d/d/h3
+Delete: /b/d/e/i3
+Search: / found
+Search: / found
+Delete: /a/a/a/b4
+Delete: /a/a/b/c4
+Delete: /b/b/b/d4
+Delete: /b/b/c/e4
+Delete: /a/c/c/f4
+Delete: /a/c/d/g4
+Delete: /b/d/d/h4
+Delete: /b/d/e/i4
+Search: / found
+Search: / found
+Search: / found
+
+/a
+/a/a
+/a/a/a
+/a/a/a/a
+/a/a/a/b1
+/a/a/b
+/a/c
+/a/c/c
+/a/c/c/c
+/a/c/d
+/a/c/d/g3
+/b
+/b/b
+/b/b/b
+/b/b/b/b
+/b/b/c
+/b/d
+/b/d/d
+/b/d/d/d
+/b/d/e

@@ -17,7 +17,9 @@
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
 | Object-Oriented Programming                    | Java                         | [Library Manager](/Library-Manager/)                                                |
-| Operating Systems                              | C                            | [Técnico File System]                                            |
+| Operating Systems                              | C                            | [Técnico File System Part1](/TecnicoFS1/)                                            |
+| Operating Systems                              | C                            | [Técnico File System Part2](/TecnicoFS2/)                                            |
+| Operating Systems                              | C                            | [Técnico File System Part3](/TecnicoFS3/)                                            |
 | Theory of Computation                          | Turing Machine               | [Universal Turing Machine]                                       |
 | Analysis and Synthesis of Algorithms           | C                            | [Grades Predictor]                                               |
 | Analysis and Synthesis of Algorithms           | C                            | [Citizens Supermarkets]                                          |

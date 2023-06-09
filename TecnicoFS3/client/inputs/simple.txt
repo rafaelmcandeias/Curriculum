@@ -1,0 +1,18 @@
+# 8 creates
+c a f
+c dir1 d
+c dir2 d
+c dir1/sdir1 d
+c dir1/sdir1/fil1 f
+c dir2/sdir2 d
+c dir2/sdir2/fil2 f
+d dir2/sdir2/fil2
+c b f
+c c f
+c d f
+c e f
+p out1
+c f f
+l f
+c g f
+c h f 

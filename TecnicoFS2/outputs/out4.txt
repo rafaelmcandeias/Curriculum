@@ -1,0 +1,9 @@
+Create directory: one
+Create directory: one/two
+Create directory: one/two/three
+Delete: one/two/three
+Search: three not found
+Search: one found
+
+/one
+/one/two

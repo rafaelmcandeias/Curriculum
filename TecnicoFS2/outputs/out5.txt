@@ -1,0 +1,43 @@
+Create directory: /a
+Create directory: /c
+Create directory: /e
+Create directory: /a
+Create directory: /c
+Create directory: /e
+Create file: /y
+Create directory: /a/b
+Create file: /a/b2
+Create file: /a/b3
+Create file: /a/b4
+Create file: /a/b5
+Create file: /a/z
+Create directory: /c/d
+Create file: /c/d2
+Create file: /c/d3
+Create file: /c/d4
+Create file: /c/d5
+Create directory: /e/f
+Create directory: /e/f2
+Create directory: /e/f3
+Create file: /x
+Create file: /x/y/w/z
+
+/a
+/a/d2
+/a/d5
+/a/z
+/a/b
+/a/b3
+/a/b2
+/a/b5
+/a/b4
+/c
+/c/d
+/c/d3
+/c/d4
+/e
+/e/f
+/e/f2
+/e/f3
+/y
+/x
