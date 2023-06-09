@@ -1,5 +1,7 @@
 # Bachelor-Projects
-### 1st Year
+
+## 1st Year
+
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
 | Foundations of Programming                     | Python                       | [Hello Quantum](/Hello-Quantum)                                  |
@@ -10,10 +12,11 @@
 
 <br/>
 
-### 2nd Year
+## 2nd Year
+
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
-| Object-Oriented Programming                    | Java                         | [Library Manager]                                                |
+| Object-Oriented Programming                    | Java                         | [Library Manager](/Library-Manager/)                                                |
 | Operating Systems                              | C                            | [Técnico File System]                                            |
 | Theory of Computation                          | Turing Machine               | [Universal Turing Machine]                                       |
 | Analysis and Synthesis of Algorithms           | C                            | [Grades Predictor]                                               |
@@ -24,7 +27,8 @@
 
 <br/>
 
-### 3rd Year
+## 3rd Year
+
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
 | Databases                                      | PostgreSQL/Python Flask/HTML | [Odisseia]                                                       |

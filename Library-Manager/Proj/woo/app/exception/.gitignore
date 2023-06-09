@@ -1,0 +1,15 @@
+/DuplicateClientKeyException.class
+/DuplicateProductKeyException.class
+/DuplicateSupplierKeyException.class
+/FileOpenFailedException.class
+/InvalidDateException.class
+/Message.class
+/UnauthorizedSupplierException.class
+/UnavailableProductException.class
+/UnknownClientKeyException.class
+/UnknownProductKeyException.class
+/UnknownServiceLevelException.class
+/UnknownServiceTypeException.class
+/UnknownSupplierKeyException.class
+/UnknownTransactionKeyException.class
+/WrongSupplierException.class
