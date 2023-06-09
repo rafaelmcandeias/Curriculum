@@ -20,7 +20,7 @@
 | Operating Systems                              | C                            | [Técnico File System Part1](/TecnicoFS1/)                                            |
 | Operating Systems                              | C                            | [Técnico File System Part2](/TecnicoFS2/)                                            |
 | Operating Systems                              | C                            | [Técnico File System Part3](/TecnicoFS3/)                                            |
-| Theory of Computation                          | Turing Machine               | [Universal Turing Machine]                                       |
+| Theory of Computation                          | Turing Machine               | [Universal Turing Machine](/Universal-Turing-Machine/)                                       |
 | Analysis and Synthesis of Algorithms           | C                            | [Grades Predictor]                                               |
 | Analysis and Synthesis of Algorithms           | C                            | [Citizens Supermarkets]                                          |
 | Human-Computer Interaction                     | Figma                        | [Urban Mobility App]                                             |
