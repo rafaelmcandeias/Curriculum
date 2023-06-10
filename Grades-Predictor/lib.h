@@ -19,9 +19,15 @@
 /* Data types */
 typedef struct students {
     int grade;
+    /* keeps all ids of student friends*/
     int *friends;
+    /* size of friends vector*/
     int head; 
 } student;
 
 /* Functions */
-int parse_create();
+int parse_create(void);
+#ifdef DEBUG
+void print_graph(void);
+#endif
+void calculate_grades(void);

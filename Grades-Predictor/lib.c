@@ -11,11 +11,20 @@
 
 #include "lib.h"
 
+/* data to store all the students*/
 student **class;
+int N;
+int M;
 
-int parse_create() {
-    int N;
-    int M;
+
+/**
+ * @brief funtion that verifies the input
+ * and creates the graph
+ * Time: O(N) or O(M); Space: O(N^2)
+ * 
+ * @return int 
+ */
+int parse_create(void) {
     int line_count;
     int st1;
     int st2;
@@ -35,8 +44,9 @@ int parse_create() {
         class[line_count] = malloc(sizeof(student));
         class[line_count]->head = 0;
         class[line_count]->friends = malloc(sizeof(int) * N);
-        /* check if grade is correct*/
-        if (scanf("%d", &class[line_count]->grade) != 1 || class[line_count]->grade < 0) {
+        
+        /* check grade*/
+        if (scanf("%d", &class[line_count]->grade) != 1) {
             printf("Grade for line %d is incorrect\n", line_count);
             return FAILURE;
         }
@@ -49,8 +59,35 @@ int parse_create() {
             printf("Connection in line %d is incorrect\n", line_count);
             return FAILURE;
         }
+        st1--;
+        st2--;
         class[st1]->friends[class[st1]->head++] = st2;
     }
     
     return SUCCESS;
+}
+
+
+#ifdef DEBUG
+void print_graph(void) {
+    int si;
+    int fi;
+    printf("1\n");
+    for (si = 0; si < N; si++) {
+        printf("Student %d (grade = %d): ", si+1, class[si]->grade);
+        for (fi = 0; fi < class[si]->head; fi++) {
+            printf("%d ", class[si]->friends[fi]+1);
+        }
+        printf("\n");
+    }
+}
+#endif
+
+
+/**
+ * @brief function to calculate the grades of the class
+ * 
+ */
+void calculate_grades(void) {
+    
 }
