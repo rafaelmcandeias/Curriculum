@@ -1,6 +1,7 @@
 # Curriculum
 
 All projects developed during my educational process.
+
 Bachelor + Master @ [Técnico](https://tecnico.ulisboa.pt/pt/) and [TU-Darmstadt](https://www.tu-darmstadt.de) + Thesis
 
 ## Bachelor-Projects
