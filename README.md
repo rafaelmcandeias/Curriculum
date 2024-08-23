@@ -1,6 +1,11 @@
-# Bachelor-Projects
+# Curriculum
 
-## 1st Year
+All projects developed during my educational process.
+Bachelor + Master @ [Técnico](https://tecnico.ulisboa.pt/pt/) and [TU-Darmstadt](https://www.tu-darmstadt.de) + Thesis
+
+## Bachelor-Projects
+
+### 1st Year
 
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
@@ -12,7 +17,7 @@
 
 <br/>
 
-## 2nd Year
+### 2nd Year
 
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
@@ -29,7 +34,7 @@
 
 <br/>
 
-## 3rd Year
+### 3rd Year
 
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
@@ -41,9 +46,9 @@
 | Software Engineering                           | PostgreSQL/Spring Boot/Vue   | [Quizzes Tutor]                                                  |
 | Distributed Systems                            | Java/gRPC                    | [Bicloin]                                                        |
 
-# Master-Projects
+## Master-Projects
 
-## 1st Year
+### 1st Year
 
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
@@ -55,7 +60,7 @@
 
 <br/>
 
-## 2nd Year
+### 2nd Year
 
 | Subject                                        | Language(s)                  |  Name                                                            |
 | ---------------------------------------------- | ---------------------------- | -----------------------------------------------------------------|
@@ -72,4 +77,4 @@
 
 <br/>
 
-# Thesis
+## Thesis
