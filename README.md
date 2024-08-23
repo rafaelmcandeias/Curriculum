@@ -78,9 +78,7 @@ Bachelor + Master @ [Técnico](https://tecnico.ulisboa.pt/pt/) and [TU-Darmstadt
 
 <br/>
 
-## Thesis
-
-### Contributions for Soil Nutrient Estimation Using Earth Observation Data: Datasets, Toolkits and Semi-Supervised Learning
+## Thesis: Contributions for Soil Nutrient Estimation Using Earth Observation Data: Datasets, Toolkits and Semi-Supervised Learning
 
 Toolkit improvements available in [TerraSenseTK](https://gitlab.com/ManelPereira/terrasensetk/-/tree/develop?ref_type=heads)
 
