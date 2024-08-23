@@ -79,3 +79,5 @@ Bachelor + Master @ [Técnico](https://tecnico.ulisboa.pt/pt/) and [TU-Darmstadt
 <br/>
 
 ## Thesis
+
+Available in [TerraSenseTK](https://gitlab.com/ManelPereira/terrasensetk/-/tree/develop?ref_type=heads)
