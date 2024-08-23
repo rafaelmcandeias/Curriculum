@@ -80,4 +80,6 @@ Bachelor + Master @ [Técnico](https://tecnico.ulisboa.pt/pt/) and [TU-Darmstadt
 
 ## Thesis
 
-Available in [TerraSenseTK](https://gitlab.com/ManelPereira/terrasensetk/-/tree/develop?ref_type=heads)
+Toolkit improvements available in [TerraSenseTK](https://gitlab.com/ManelPereira/terrasensetk/-/tree/develop?ref_type=heads)
+
+Dataset investigation and Thesis final submission present in [Msc_Thesis](https://github.com/rafaelmcandeias/MSc_Thesis_IST)
