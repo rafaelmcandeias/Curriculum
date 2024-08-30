@@ -1,0 +1,13 @@
+# 0 < Energy <= 1
+# 4 < Force <= 7
+# 2 < Speed <= 3.5
+#
+# Name Speed Force Energy Mode
+#
+Random 3.5 5.5 0.7 random
+#
+Beginner 3.5 5.5 0.7 beginner
+#
+Expert 3.5 5.5 0.7 expert
+#
+Pro 3.5 5.5 0.7 pro
