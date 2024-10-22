@@ -11,7 +11,7 @@
 
 #include "lib.h"
 
-int main() {
+int main(void) {
     char parameters[INPUT];
     char command = getchar();
 

@@ -1,5 +1,11 @@
 # Guidelines
 
+## Testing
+
+./[test].sh [testes-enunciado] [*.o]
+
+like so: ./test-vg.sh testes-enunciado lib.o main.o
+
 ## Compilação
 
 * O programa deve ser compilado usando o comando `gcc -Wall -Wextra -Werror -ansi -pedantic`.

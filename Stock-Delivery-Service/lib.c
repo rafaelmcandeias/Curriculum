@@ -189,7 +189,7 @@ void add_qtd_to_stock(char *parameters) {
  * @brief Creates new delivery
  * @performance: O(N)
  */
-void new_delivery() {
+void new_delivery(void) {
     int idp;
     if (global_ide < 500) {
         deliveries[global_ide] = (Delivery*)malloc(sizeof(Delivery));
@@ -383,7 +383,7 @@ void delivery_with_most_product(char *parameters) {
  * mergesort algorithm
  * @performance: O(NLog(N))
  */
-void print_stock_ordered() {
+void print_stock_ordered(void) {
     int *arr = (int*)malloc(sizeof(int) * global_idp);
     int i, idp;
 
@@ -449,7 +449,7 @@ void print_products_in_delivery(char *parameters) {
  * @brief Frees allocated mem
  * @performance: O(N)
  */
-void end() {
+void end(void) {
     int i;
     /* Clears stock */
     for (i = 0; i < global_idp; i++) {
@@ -468,7 +468,7 @@ void end() {
  * 
  */
 #ifdef DEBUG
-void print_all() {
+void print_all(void) {
     int i, j;
     printf("\n-------Print Stock-------\n");
     for (i = 0; i < global_idp; i++) {

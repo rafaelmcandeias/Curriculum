@@ -29,7 +29,6 @@ Podem também instalar a ferramenta `icdiff` (Ubuntu: `sudo apt install icdiff`)
 
      icdiff myoutput.out testes-enunciado/teste01.out | less -R
 
-
 ## Quando o programa rebenta
 
 Se um programa rebentar, a ferramenta `valgrind` ou a opção `-fsanitize` podem ser usadas para encontrar a razão.
@@ -45,41 +44,41 @@ Para analisar um teste que está a falhar, deverá efetuar os seguintes passos:
 1. Compilar com as flags `-g -fsanitize=address`, e.g. `gcc -g -fsanitize=address -Wall -Wextra -Werror -ansi -pedantic proj1.c`.
 2. executar o projecto compilado usando o teste que está a falhar como standard input, e.g.
 
-        $ ./a.out < testes-publicos/teste27.in
+        ./a.out < testes-publicos/teste27.in
 
 Podem também ignorar o output do projecto por forma a ver só os erros da seguinte forma:
 
-        $ ./a.out < testes-publicos/teste27.in > /dev/null
+        ./a.out < testes-publicos/teste27.in > /dev/null
 
 ## Valgrind
 
 É aconselhável analisar o projecto usando também a ferramenta Valgrind. Para instalar no Ubuntu:
 
-    $ sudo apt install valgrind
+    sudo apt install valgrind
 
 Para analisar com o `valgrind` um teste que está a falhar, deverá efectuar os seguintes passos:
 
 1. Compilar com a flag `-g`, e.g. `gcc -g -Wall -Wextra -Werror -ansi -pedantic proj1.c`.
 2. executar o projecto compilado com o Valgrind usando o teste que está a falhar como standard input, e.g.
 
-        $ valgrind ./a.out < testes-publicos/teste27.in
+        valgrind ./a.out < testes-publicos/teste27.in
 
 Podem também ignorar o output do projecto por forma a ver só os erros da seguinte forma:
 
-        $ valgrind ./a.out < testes-publicos/teste27.in > /dev/null
+        valgrind ./a.out < testes-publicos/teste27.in > /dev/null
 
-*Nota:* O valgrind neste momento não tem suporte completo para Macs. As alternativas são utilizar uma máquina virtual com ubuntu, os computadores dos laboratórios, ou pedir ajuda a um colega/amigo.
+*Nota:_ O valgrind neste momento não tem suporte completo para Macs. As alternativas são utilizar uma máquina virtual com ubuntu, os computadores dos laboratórios, ou pedir ajuda a um colega/amigo.
 
 ## cppcheck
 
 É aconselhável analisar o projecto usando também a ferramenta `cppcheck`. Para instalar no Ubuntu:
 
-    $ sudo apt install cppcheck
+    sudo apt install cppcheck
 
 Para analisar o projecto usando esta ferramenta deverá executar:
 
-    $ cppcheck cppcheck --enable=all --language=c --std=c99 proj1.c
+    cppcheck cppcheck --enable=all --language=c --std=c99 proj1.c
 
 ou, para mais informações:
 
-    $ cppcheck cppcheck --enable=all --language=c --std=c99 -v proj1.c
+    cppcheck cppcheck --enable=all --language=c --std=c99 -v proj1.c

@@ -65,7 +65,7 @@ void add_to_stock(char *parameters);
 /* command: q */
 void add_qtd_to_stock(char *parameters);
 /* command: N */
-void new_delivery();
+void new_delivery(void);
 /* command: A */
 void add_product_to_delivery(char *parameters);
 /* command: r */
@@ -81,14 +81,14 @@ void print_product_in_delivery(char *parameters);
 /* command: m */
 void delivery_with_most_product(char *parameters);
 /* command: l */
-void print_stock_ordered();
+void print_stock_ordered(void);
 /* command: L */
 void print_products_in_delivery(char *parameters);
-void end();
+void end(void);
 
 #ifdef DEBUG
 /* command: P */
-void print_all();
+void print_all(void);
 #endif
 
 #endif
