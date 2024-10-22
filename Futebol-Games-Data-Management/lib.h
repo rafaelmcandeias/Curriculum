@@ -54,11 +54,11 @@ typedef struct LinkedList {
 } linked_list_t;
 
 
-void start();
+void start(void);
 unsigned long hash(char *str);
 void free_game(game_t *game);
 void free_team(team_t *team);
-void end();
+void end(void);
 game_t *get_game(char *name);
 team_t *get_team(char *name);
 void merge(char **names, int l, int m, int r);
@@ -75,7 +75,7 @@ void add_team(char* parameters, int line_number);
 void search_team(char* parameters, int line_number);
 void print_winners_ordered(int line_number);
 #ifdef DEBUG
-void print_all();
+void print_all(void);
 #endif
 
 #endif

@@ -59,7 +59,7 @@ int add(int val) {
 }
 
 /* Reads n values from stdin and inserts them into the vector vals. */
-int main() {
+int main(void) {
     int n, v;
     scanf("%d", &n);
     while (n--) {

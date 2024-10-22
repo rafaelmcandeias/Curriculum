@@ -21,7 +21,7 @@ int teams_counter = 0;
  * @brief Initializes the games hash table, teams hash table and linked list of games
  * 
  */
-void start() {
+void start(void) {
     int i;
     
     games = (game_t **)malloc(sizeof(game_t *) * HASH_LIMIT);
@@ -100,7 +100,7 @@ void free_team(team_t *team) {
  * @brief frees memory from main data types
  * @complexity: O(n) , n = max(HASH_LIMIT, n_games)
  */
-void end() {
+void end(void) {
     node_t *curr;
     team_t *team, *team_remove;
     int i;
@@ -591,7 +591,7 @@ void print_winners_ordered(int line_number) {
 
 /*
 #ifdef DEBUG
-void print_all() {
+void print_all(void) {
 
 }
 #endif
