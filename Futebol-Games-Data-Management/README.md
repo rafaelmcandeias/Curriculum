@@ -5,7 +5,6 @@
 ## Change Log
 
 ## 1. Introduction
-test
 
 The aim of this project is to develop a system in C language to manage a database of friendly football matches.
 Interaction with the program should occur through a series of lines consisting of a letter (command) and a number of arguments depending on the command to execute. The possible commands are listed in the following table and indicate the operations to perform.
