@@ -240,9 +240,7 @@ void *consumidor(){
         pthread_mutex_unlock(&mutex);
         pthread_cond_signal(&podeProd);
         applyCommands(command);
-
     }
-
 
     return 0;
 }

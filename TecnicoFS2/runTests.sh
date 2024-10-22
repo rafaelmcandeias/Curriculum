@@ -11,7 +11,7 @@ do
     do
         echo InputFile=$inputfile NumThreads=$n
         ./tecnicofs $inputfile $outputdir/$(basename $inputfile .txt) $n | grep "TecnicoFS"
-        n=$(( n+1 )) #increments n
+        n=$(( n+1 ))
     done
     n=1
 done
