@@ -1,0 +1,7 @@
+{
+    "makefile.configureOnOpen": false,
+    "files.associations": {
+        "*.pl": "prolog",
+        "math.h": "c"
+    }
+}

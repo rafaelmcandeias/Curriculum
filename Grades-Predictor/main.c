@@ -26,5 +26,7 @@ int main(void) {
 
     calculate_grades();
 
+    final_result();
+
     return EXIT_SUCCESS;
 }

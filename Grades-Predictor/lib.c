@@ -20,7 +20,8 @@ int M;
 /**
  * @brief funtion that verifies the input
  * and creates the graph
- * Time: O(N) or O(M); Space: O(N^2)
+ * Time: O(max(N, M))
+ * Space: O(N^2)
  * 
  * @return int 
  */
@@ -42,9 +43,11 @@ int parse_create(void) {
     for (line_count = 0; line_count < N; line_count++) {
         /* create object*/
         class[line_count] = malloc(sizeof(student));
-        class[line_count]->head = 0;
-        class[line_count]->friends = malloc(sizeof(int) * N);
-        
+        /* We assume each student will have at most half the clas as friends */
+        class[line_count]->friends = malloc(sizeof(int) * N/2);
+        class[line_count]->last_friend_index = -1;
+        class[line_count]->flag_visited = 0;
+
         /* check grade*/
         if (scanf("%d", &class[line_count]->grade) != 1) {
             printf("Grade for line %d is incorrect\n", line_count);
@@ -61,7 +64,8 @@ int parse_create(void) {
         }
         st1--;
         st2--;
-        class[st1]->friends[class[st1]->head++] = st2;
+        class[st1]->last_friend_index++;
+        class[st1]->friends[class[st1]->last_friend_index] = st2;
     }
     
     return SUCCESS;
@@ -75,7 +79,7 @@ void print_graph(void) {
     printf("1\n");
     for (si = 0; si < N; si++) {
         printf("Student %d (grade = %d): ", si+1, class[si]->grade);
-        for (fi = 0; fi < class[si]->head; fi++) {
+        for (fi = 0; fi <= class[si]->last_friend_index; fi++) {
             printf("%d ", class[si]->friends[fi]+1);
         }
         printf("\n");
@@ -84,10 +88,51 @@ void print_graph(void) {
 #endif
 
 
+int highest_grade(student* s) {
+    int i, friends_grade;
+
+    if (s->flag_visited == 1) {
+        return s->grade;
+    }
+
+    s->flag_visited = 1;
+    for (i = 0; i <= s->last_friend_index; i++) {
+        friends_grade = highest_grade(class[s->friends[i]]);
+        s->grade = s->grade > friends_grade ? s->grade : friends_grade;
+    }
+
+    return s->grade;
+}
+
+
 /**
  * @brief function to calculate the grades of the class
- * 
+ * We apply the DFS algortihm per student.
+ * Time: O((E+V)*N)
+ * Space: O(N)
  */
 void calculate_grades(void) {
+    int sp, i, friends_grade;
     
+    for (sp = 0; sp < N; sp++) {
+        /* mark student as visited */
+        class[sp]->flag_visited = 1;
+
+        for (i = 0; i <= class[sp]->last_friend_index; i++) {
+            friends_grade = highest_grade(class[class[sp]->friends[i]]);
+            class[sp]->grade = class[sp]->grade > friends_grade ? class[sp]->grade : friends_grade;
+        }
+    }
+}
+
+/**
+ * @brief Function that prints the predicted grade per student
+ * Time: O(N)
+ * Space: O(1)
+ */
+void final_result(void) {
+    int sti;
+    for (sti = 0; sti < N; sti++) {
+        printf("%d\n", class[sti]->grade);
+    }
 }

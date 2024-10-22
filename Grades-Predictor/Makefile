@@ -14,7 +14,7 @@ CFLAGS = -Wall -Wextra -Werror -ansi -pedantic
 all: main
 
 # Debug rules
-debug: CFLAGS += -g -fsanitize=address -DDEBUG
+debug: CFLAGS += -g -DDEBUG
 debug: all
 
 # Executables
@@ -30,4 +30,4 @@ lib.o: lib.c
 
 # Rule to clean files
 clean:
-	rm -r *.o main%
+	rm -r *.o main
