@@ -2,8 +2,8 @@
 """
 Main code
 """
-def add_x(tabuleiro):
-    """ Function that returns a tuple equal to the given one but with x's instead of -1. """
+def add_x(tabuleiro: tuple) -> tuple:
+    """ Function that add a x bit to the table"""
     tab_to_print = ()
     for line in tabuleiro:
         for state in line:
@@ -14,7 +14,8 @@ def add_x(tabuleiro):
     return tab_to_print
 
 
-def switch_bit(bit):
+
+def switch_bit(bit: int) -> int:
     """ Function that replaces a bit 0 to 1 and bit 1 to 0. """
     if bit != -1:
         return 1 - bit
@@ -22,7 +23,7 @@ def switch_bit(bit):
     return bit
 
 
-def switch_line(line):
+def switch_line(line: tuple) -> tuple:
     """ Function that switches all bits in a line. """
     new_line = ()
     for bit in line:
@@ -30,8 +31,9 @@ def switch_line(line):
     return new_line
 
 
-def eh_tabuleiro(tabuleiro):
-    """ Function that receives any type of variable.
+def eh_tabuleiro(tabuleiro: tuple) -> bool:
+    """
+        Function that receives any type of variable.
         Checks if it is a tabuleiro.
     """
     if not isinstance(tabuleiro, tuple) or len(tabuleiro) != 3:
@@ -51,7 +53,7 @@ def eh_tabuleiro(tabuleiro):
     return True
 
 
-def tabuleiro_str(tabuleiro):
+def tabuleiro_str(tabuleiro: tuple) -> str:
     """ Function that prints into terminal the given tabuleiro.
         Raises ValueError exception if tabuleiro is not valid.
     """
@@ -67,7 +69,7 @@ def tabuleiro_str(tabuleiro):
         raise ValueError("tabuleiro_str: argumento invalido")
 
 
-def tabuleiros_iguais(t1, t2):
+def tabuleiros_iguais(t1: tuple, t2: tuple) -> bool:
     """ Function that returns true if booth tabuleiros are exactly the same. """
     if not eh_tabuleiro(t1) or not eh_tabuleiro(t2):
         raise ValueError(
@@ -79,12 +81,12 @@ def tabuleiros_iguais(t1, t2):
     return True
 
 
-def porta_x(tabuleiro, local):
+def porta_x(tabuleiro: tuple, local: str) -> tuple:
     """ Function that switches bits in port x of the board.
         X port can be the 2nd line or 2nd element of the first 2 lines plus the 1st element of the 3rd line.
         A switch consist on replacing every bit 0 to 1 and 1 to 0.
     """
-    if not eh_tabuleiro(tabuleiro) or local not in ("E", "D") or not isinstance(local, str):
+    if not eh_tabuleiro(tabuleiro) or not isinstance(local, str) or local not in ("E", "D"):
         raise ValueError('porta_x: um dos argumentos e invalido')
 
     if local == 'E':
@@ -95,7 +97,7 @@ def porta_x(tabuleiro, local):
             (switch_bit(tabuleiro[2][0]), tabuleiro[2][1]))
 
 
-def porta_z(tabuleiro, local):
+def porta_z(tabuleiro: tuple, local: str) -> tuple:
     """ Function that switches bits in port z of the board.
         Z port can be the 1st line or 2nd element of the last bit in all lines.
         A switch consist on replacing every bit 0 to 1 and 1 to 0.
@@ -111,7 +113,7 @@ def porta_z(tabuleiro, local):
             (tabuleiro[2][0], switch_bit(tabuleiro[2][1])))
 
 
-def porta_h(tabuleiro, local):
+def porta_h(tabuleiro: tuple, local: str) -> tuple:
     """ Function that switches lines in port h of the board.
         H port can switch the 1st line with the 2nd line of the board
             or the last bit in all lines with the 2nd bit in the 1st and 2nd line and the 1st bit of the last line.
