@@ -1,3 +1,5 @@
+# TODO
+
 # Curriculum
 
 All projects developed during my educational process.
